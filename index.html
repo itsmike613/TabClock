@@ -17,7 +17,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/phosphor-icons@1.4.2/css/phosphor.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
     <link rel="stylesheet" href="Assets/Styles/index.css">
 
     <!-- Scripts -->
@@ -32,67 +32,97 @@
     </div>
 
     <div class="section" id="settings">
-        <h2>Settings</h2>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h3><i class="ph-clock"></i> Time Format</h3>
-                    <div class="form-check">
+        <div class="settings-panel">
+            <h2 class="settings-title"><i class="ph ph-gear me-2"></i> Settings</h2>
+
+            <div class="settings-group">
+                <div class="settings-item">
+                    <i class="ph ph-clock me-2"></i>
+                    <label class="form-check-label" for="toggle-24h">24-Hour Format</label>
+                    <div class="form-check form-switch ms-auto">
                         <input class="form-check-input" type="checkbox" id="toggle-24h">
-                        <label class="form-check-label" for="toggle-24h">24-Hour Format</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="toggle-seconds">
-                        <label class="form-check-label" for="toggle-seconds">Show Seconds</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="toggle-ampm">
-                        <label class="form-check-label" for="toggle-ampm">Show AM/PM</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="toggle-date">
-                        <label class="form-check-label" for="toggle-date">Show Date</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="toggle-milliseconds">
-                        <label class="form-check-label" for="toggle-milliseconds">Show Milliseconds</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="toggle-slow-ms">
-                        <label class="form-check-label" for="toggle-slow-ms">Slower Millisecond Update</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="toggle-hint">
-                        <label class="form-check-label" for="toggle-hint">Hide Scroll Hint</label>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <h3><i class="ph-calendar"></i> Date Format</h3>
-                    <input class="form-control form-control-sm" id="date-input" placeholder="e.g. W, MM Do YYYY" />
-                    <small class="form-text text-muted">Use YYYY, YY, MM, M, mm, m, DD, D, Do, W, w — freely add text/emojis.</small>
+                <div class="settings-item">
+                    <i class="ph ph-timer me-2"></i>
+                    <label class="form-check-label" for="toggle-seconds">Show Seconds</label>
+                    <div class="form-check form-switch ms-auto">
+                        <input class="form-check-input" type="checkbox" id="toggle-seconds">
+                    </div>
+                </div>
+                <div class="settings-item">
+                    <i class="ph ph-sun me-2"></i>
+                    <label class="form-check-label" for="toggle-ampm">Show AM/PM</label>
+                    <div class="form-check form-switch ms-auto">
+                        <input class="form-check-input" type="checkbox" id="toggle-ampm">
+                    </div>
+                </div>
+                <div class="settings-item">
+                    <i class="ph ph-calendar-check me-2"></i>
+                    <label class="form-check-label" for="toggle-date">Show Date</label>
+                    <div class="form-check form-switch ms-auto">
+                        <input class="form-check-input" type="checkbox" id="toggle-date">
+                    </div>
+                </div>
+                <div class="settings-item">
+                    <i class="ph ph-timer me-2"></i>
+                    <label class="form-check-label" for="toggle-milliseconds">Show Milliseconds</label>
+                    <div class="form-check form-switch ms-auto">
+                        <input class="form-check-input" type="checkbox" id="toggle-milliseconds">
+                    </div>
+                </div>
+                <div class="settings-item">
+                    <i class="ph ph-speedometer me-2"></i>
+                    <label class="form-check-label" for="toggle-slow-ms">Slower Millisecond Update</label>
+                    <div class="form-check form-switch ms-auto">
+                        <input class="form-check-input" type="checkbox" id="toggle-slow-ms">
+                    </div>
+                </div>
+                <div class="settings-item">
+                    <i class="ph ph-eye-slash me-2"></i>
+                    <label class="form-check-label" for="toggle-hint">Hide Scroll Hint</label>
+                    <div class="form-check form-switch ms-auto">
+                        <input class="form-check-input" type="checkbox" id="toggle-hint">
+                    </div>
                 </div>
             </div>
-            <div class="row mt-4">
-                <div class="col-md-6">
-                    <h3><i class="ph-paint-brush"></i> Appearance</h3>
-                    <div class="mb-3">
-                        <label for="theme-select" class="form-label">Theme</label>
+
+            <div class="settings-group">
+                <div class="settings-item flex-column">
+                    <div class="d-flex align-items-center w-100 mb-2">
+                        <i class="ph ph-calendar me-2"></i>
+                        <span>Date Format</span>
+                    </div>
+                    <input class="form-control form-control-sm" id="date-input" placeholder="e.g. W, MM Do YYYY" />
+                    <small class="form-text text-muted mt-1">YYYY, YY, MM, mm, M, m, WW, W, w, Q, Qo, DD, D, Do, DDD, DDDo — You can also add text/emojis.</small>
+                </div>
+            </div>
+
+            <div class="settings-group">
+                <div class="settings-item flex-column">
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="ph ph-paint-brush me-2"></i>
+                        <span>Appearance</span>
+                    </div>
+                    <div class="w-100 mb-2">
+                        <label for="theme-select" class="form-label small">Theme</label>
                         <select class="form-select form-select-sm" id="theme-select">
                             <option value="dark">Dark</option>
                             <option value="light">Light</option>
                             <option value="solarized">Solarized</option>
-                            <option value="coffee">Coffee</option>
-                            <option value="ocean">Ocean</option>
-                            <option value="forest">Forest</option>
                             <option value="hacker">Hacker</option>
                             <option value="moooo">Moooo</option>
                             <option value="cherry">Cherry Blossom</option>
                             <option value="belgian">Belgian Evergreen</option>
                             <option value="retrowave">Retrowave</option>
+                            <option value="glitchcore">Glitchcore</option>
+                            <option value="ghostscript">Ghostscript</option>
+                            <option value="spaceodyssey">Space Odyssey</option>
+                            <option value="sakura">Sakura</option>
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="font-select" class="form-label">Font</label>
+                    <div class="w-100 mb-2">
+                        <label for="font-select" class="form-label small">Font</label>
                         <select class="form-select form-select-sm" id="font-select">
                             <option value="Blaka Ink">Blaka Ink</option>
                             <option value="Bungee">Bungee</option>
@@ -109,8 +139,6 @@
                             <option value="Hanalei Fill">Hanalei Fill</option>
                             <option value="Honk">Honk</option>
                             <option value="Inter">Inter</option>
-                            <option value="Jersey 10">Jersey 10</option>
-                            <option value="Jersey 15">Jersey 15</option>
                             <option value="Kablammo">Kablammo</option>
                             <option value="Micro 5">Micro 5</option>
                             <option value="Modak">Modak</option>
@@ -128,22 +156,24 @@
                             <option value="Rubik Wet Paint">Rubik Wet Paint</option>
                             <option value="Shantell Sans">Shantell Sans</option>
                             <option value="Tagesschrift">Tagesschrift</option>
+                            <option value="Sawarabi Mincho">Sawarabi Mincho</option>
+                            <option value="Press Start 2P">Press Start 2P</option>
                             <option disabled>──────────</option>
                             <option value="sans-serif">Sans</option>
                             <option value="serif">Serif</option>
                             <option value="monospace">Monospace</option>
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="text-color" class="form-label">Text Color</label>
+                    <div class="w-100 mb-2">
+                        <label for="text-color" class="form-label small">Text Color</label>
                         <input type="color" class="form-control form-control-sm" id="text-color">
                     </div>
-                    <div class="mb-3">
-                        <label for="bg-color" class="form-label">Background Color</label>
+                    <div class="w-100 mb-2">
+                        <label for="bg-color" class="form-label small">Background Color</label>
                         <input type="color" class="form-control form-control-sm" id="bg-color">
                     </div>
-                    <div class="mb-3">
-                        <label for="placement-select" class="form-label">Clock Placement</label>
+                    <div class="w-100 mb-2">
+                        <label for="placement-select" class="form-label small">Clock Placement</label>
                         <select class="form-select form-select-sm" id="placement-select">
                             <option value="top-left">Top Left</option>
                             <option value="top-center">Top Center</option>
@@ -157,9 +187,10 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <button class="btn btn-primary btn-sm" id="fullscreen-btn">Fullscreen</button>
-                </div>
+            </div>
+
+            <div class="settings-footer">
+                <button class="btn btn-primary btn-sm w-100" id="fullscreen-btn">Fullscreen</button>
             </div>
         </div>
     </div>

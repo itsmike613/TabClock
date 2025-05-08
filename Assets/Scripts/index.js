@@ -18,14 +18,15 @@ const themeMap = {
     dark: { bg: "#000000", text: "#ffffff", font: "Inter" },
     light: { bg: "#ffffff", text: "#000000", font: "Inter" },
     solarized: { bg: "#002b36", text: "#93a1a1", font: "monospace" },
-    coffee: { bg: "#3b2f2f", text: "#f5f5dc", font: "serif" },
-    ocean: { bg: "#001f3f", text: "#7fdbff", font: "sans-serif" },
-    forest: { bg: "#0b3d0b", text: "#cce6cc", font: "cursive" },
     hacker: { bg: "#000000", text: "#00F800", font: "monospace" },
     moooo: { bg: "#f8f8f8", text: "#222222", font: "Moo Lah Lah" },
     cherry: { bg: "#f3eded", text: "#fda9a9", font: "Cherry Bomb One" },
     belgian: { bg: "#e6d9bd", text: "#6f8b6e", font: "Hanalei" },
-    retrowave: { bg: "#14165F", text: "#000000", font: "Honk" }
+    retrowave: { bg: "#14165F", text: "#000000", font: "Honk" },
+    glitchcore: { bg: "#0d0d0d", text: "#ff0033", font: "Rubik Glitch" },
+    ghostscript: { bg: "#f8f8ff", text: "#555555", font: "Tagesschrift" },
+    spaceodyssey: { bg: "#000022", text: "#ffffff", font: "Orbitron" },
+    sakura: { bg: "#ffe4e1", text: "#8b0000", font: "Sawarabi Mincho" }
 };
 
 const timeEl = document.getElementById("time");
@@ -45,6 +46,30 @@ const elText = document.getElementById("text-color");
 const elBack = document.getElementById("bg-color");
 const elPlacement = document.getElementById("placement-select");
 const fullscreenBtn = document.getElementById("fullscreen-btn");
+
+const settingHandlers = [
+    { el: el24h, key: "use24h", event: "change", action: () => toggleAMPMState() },
+    { el: elSecs, key: "showSeconds", event: "change" },
+    { el: elAMPM, key: "showAMPM", event: "change" },
+    { el: elShowDate, key: "showDate", event: "change" },
+    { el: elShowMilliseconds, key: "showMilliseconds", event: "change", action: () => { toggleSlowMsState(); updateClock(); } },
+    { el: elSlowMs, key: "slowMsUpdate", event: "change" },
+    { el: elHideHint, key: "hideHint", event: "change", action: () => updateClock() },
+    { el: elDateInput, key: "datePattern", event: "input" },
+    { el: elFont, key: "font", event: "change", action: () => updateAppearance() },
+    { el: elText, key: "textColor", event: "input", action: () => updateAppearance() },
+    { el: elBack, key: "bgColor", event: "input", action: () => updateAppearance() },
+    { el: elTheme, key: "theme", event: "change", action: () => applyTheme(settings.theme) },
+    { el: elPlacement, key: "placement", event: "change", action: () => updateAppearance() }
+];
+
+settingHandlers.forEach(({ el, key, event, action }) => {
+    el.addEventListener(event, (e) => {
+        settings[key] = el.type === "checkbox" ? e.target.checked : e.target.value;
+        if (action) action();
+        saveSettings();
+    });
+});
 
 function pad(n) {
     return n < 10 ? "0" + n : n;
@@ -68,19 +93,34 @@ function formatDate(now) {
     const w = now.toLocaleString("default", { weekday: "short" });
     const W = now.toLocaleString("default", { weekday: "long" });
     const Y = now.getFullYear();
+    const temp = new Date(Date.UTC(Y, now.getMonth(), D));
+    const dayNum = temp.getUTCDay() || 7;
+    temp.setUTCDate(temp.getUTCDate() + 4 - dayNum);
+    const yearStart = new Date(Date.UTC(temp.getUTCFullYear(), 0, 1));
+    const WW = Math.ceil((((temp - yearStart) / 86400000) + 1) / 7);
+    const startOfYear = new Date(Y, 0, 1);
+    const DDD = Math.ceil((now - startOfYear) / 86400000) + 1;
+    const DDDo = getOrdinal(DDD);
+    const Q = Math.floor((m - 1) / 3) + 1;
+    const Qo = getOrdinal(Q);
 
     return settings.datePattern
-        .replace(/YYYY/g, Y)
-        .replace(/YY/g, String(Y).slice(-2))
-        .replace(/Do/g, Do)
-        .replace(/DD/g, DD)
-        .replace(/MM/g, MM)
-        .replace(/mm/g, mm)
-        .replace(/M(?![a-z])/g, M)
-        .replace(/m(?![a-z])/g, m)
-        .replace(/D/g, D)
-        .replace(/W/g, W)
-        .replace(/w/g, w);
+        .replace(/\bYYYY\b/g, Y)
+        .replace(/\bYY\b/g, String(Y).slice(-2))
+        .replace(/\bWW\b/g, WW)
+        .replace(/\bDDDo\b/g, DDDo)
+        .replace(/\bDDD\b/g, DDD)
+        .replace(/\bQo\b/g, Qo)
+        .replace(/\bQ\b/g, Q)
+        .replace(/\bDo\b/g, Do)
+        .replace(/\bDD\b/g, DD)
+        .replace(/\bMM\b/g, MM)
+        .replace(/\bmm\b/g, mm)
+        .replace(/\bM\b/g, M)
+        .replace(/\bm\b/g, m)
+        .replace(/\bD\b/g, D)
+        .replace(/\bW\b/g, W)
+        .replace(/\bw\b/g, w);
 }
 
 function formatTime(now) {
@@ -107,7 +147,6 @@ function updateClock() {
     const now = new Date();
     const timeString = formatTime(now);
     timeEl.textContent = timeString;
-    document.title = timeString;
     dateEl.textContent = formatDate(now);
     dateEl.style.display = settings.showDate ? "block" : "none";
     document.getElementById("scroll-indicator").style.display = settings.hideHint ? "none" : "block";
@@ -139,36 +178,14 @@ function updateAppearance() {
 }
 
 function saveSettings() {
-    localStorage.setItem("TCDB_use24h", settings.use24h);
-    localStorage.setItem("TCDB_showSeconds", settings.showSeconds);
-    localStorage.setItem("TCDB_showAMPM", settings.showAMPM);
-    localStorage.setItem("TCDB_showDate", settings.showDate);
-    localStorage.setItem("TCDB_showMilliseconds", settings.showMilliseconds);
-    localStorage.setItem("TCDB_slowMsUpdate", settings.slowMsUpdate);
-    localStorage.setItem("TCDB_hideHint", settings.hideHint);
-    localStorage.setItem("TCDB_datePattern", settings.datePattern);
-    localStorage.setItem("TCDB_font", settings.font);
-    localStorage.setItem("TCDB_textColor", settings.textColor);
-    localStorage.setItem("TCDB_bgColor", settings.bgColor);
-    localStorage.setItem("TCDB_theme", settings.theme);
-    localStorage.setItem("TCDB_placement", settings.placement);
+    localStorage.setItem("TCDB_settings", JSON.stringify(settings));
 }
 
 function loadSettings() {
-    settings.use24h = localStorage.getItem("TCDB_use24h") === "true";
-    settings.showSeconds = localStorage.getItem("TCDB_showSeconds") === "true";
-    settings.showAMPM = localStorage.getItem("TCDB_showAMPM") === "true";
-    settings.showDate = localStorage.getItem("TCDB_showDate") === "true";
-    settings.showMilliseconds = localStorage.getItem("TCDB_showMilliseconds") === "true";
-    settings.slowMsUpdate = localStorage.getItem("TCDB_slowMsUpdate") === "true";
-    settings.hideHint = localStorage.getItem("TCDB_hideHint") === "true";
-    settings.datePattern = localStorage.getItem("TCDB_datePattern") || "W, M Do YYYY";
-    settings.font = localStorage.getItem("TCDB_font") || "sans-serif";
-    settings.textColor = localStorage.getItem("TCDB_textColor") || "#ffffff";
-    settings.bgColor = localStorage.getItem("TCDB_bgColor") || "#000000";
-    settings.theme = localStorage.getItem("TCDB_theme") || "dark";
-    settings.placement = localStorage.getItem("TCDB_placement") || "middle-center";
-
+    const savedSettings = localStorage.getItem("TCDB_settings");
+    if (savedSettings) {
+        Object.assign(settings, JSON.parse(savedSettings));
+    }
     el24h.checked = settings.use24h;
     elSecs.checked = settings.showSeconds;
     elAMPM.checked = settings.showAMPM;
@@ -184,8 +201,9 @@ function loadSettings() {
     elPlacement.value = settings.placement;
 
     toggleAMPMState();
+    toggleSlowMsState();
     updateAppearance();
-    setUpdateInterval();
+    startClock();
 }
 
 function toggleAMPMState() {
@@ -198,92 +216,58 @@ function toggleAMPMState() {
     }
 }
 
-let clockInterval;
-
-function setUpdateInterval() {
-    clearInterval(clockInterval);
-    let interval = 1000;
-    if (settings.showMilliseconds) {
-        interval = settings.slowMsUpdate ? 100 : 10;
+function toggleSlowMsState() {
+    if (!settings.showMilliseconds) {
+        elSlowMs.checked = false;
+        elSlowMs.disabled = true;
+        settings.slowMsUpdate = false;
+    } else {
+        elSlowMs.disabled = false;
     }
-    clockInterval = setInterval(updateClock, interval);
 }
 
-el24h.addEventListener("change", (e) => {
-    settings.use24h = e.target.checked;
-    toggleAMPMState();
-    saveSettings();
-    setUpdateInterval();
-});
+let lastTimeString = "";
+let lastDateString = "";
+let lastMsUpdate = 0;
 
-elSecs.addEventListener("change", (e) => {
-    settings.showSeconds = e.target.checked;
-    saveSettings();
-    setUpdateInterval();
-});
+function updateClock() {
+    const now = new Date();
+    const currentTime = now.getTime();
 
-elAMPM.addEventListener("change", (e) => {
-    settings.showAMPM = e.target.checked;
-    saveSettings();
-});
+    let shouldUpdateTime = true;
+    if (settings.showMilliseconds && settings.slowMsUpdate) {
+        if (currentTime - lastMsUpdate < 100) {
+            shouldUpdateTime = false;
+        }
+    }
 
-elShowDate.addEventListener("change", (e) => {
-    settings.showDate = e.target.checked;
-    saveSettings();
-});
+    if (shouldUpdateTime) {
+        const timeString = formatTime(now);
+        if (timeString !== lastTimeString) {
+            timeEl.textContent = timeString;
+            lastTimeString = timeString;
+        }
+        lastMsUpdate = currentTime;
+    }
 
-elShowMilliseconds.addEventListener("change", (e) => {
-    settings.showMilliseconds = e.target.checked;
-    saveSettings();
-    setUpdateInterval();
-});
+    if (settings.showDate) {
+        const dateString = formatDate(now);
+        if (dateString !== lastDateString) {
+            dateEl.textContent = dateString;
+            lastDateString = dateString;
+        }
+        dateEl.style.display = "block";
+    } else {
+        dateEl.style.display = "none";
+    }
 
-elSlowMs.addEventListener("change", (e) => {
-    settings.slowMsUpdate = e.target.checked;
-    saveSettings();
-    setUpdateInterval();
-});
+    document.getElementById("scroll-indicator").style.display = settings.hideHint ? "none" : "block";
+    requestAnimationFrame(updateClock);
+}
 
-elHideHint.addEventListener("change", (e) => {
-    settings.hideHint = e.target.checked;
-    saveSettings();
+function startClock() {
     updateClock();
-});
-
-elDateInput.addEventListener("input", (e) => {
-    settings.datePattern = e.target.value;
-    saveSettings();
-});
-
-elFont.addEventListener("change", (e) => {
-    settings.font = e.target.value;
-    updateAppearance();
-    saveSettings();
-});
-
-elText.addEventListener("input", (e) => {
-    settings.textColor = e.target.value;
-    updateAppearance();
-    saveSettings();
-});
-
-elBack.addEventListener("input", (e) => {
-    settings.bgColor = e.target.value;
-    updateAppearance();
-    saveSettings();
-});
-
-elTheme.addEventListener("change", (e) => {
-    settings.theme = e.target.value;
-    applyTheme(settings.theme);
-    saveSettings();
-});
-
-elPlacement.addEventListener("change", (e) => {
-    settings.placement = e.target.value;
-    updateAppearance();
-    saveSettings();
-});
+}
 
 fullscreenBtn.addEventListener("click", () => {
     if (!document.fullscreenElement) {
@@ -294,5 +278,4 @@ fullscreenBtn.addEventListener("click", () => {
 });
 
 loadSettings();
-setUpdateInterval();
-updateClock();
+startClock();
