@@ -7,7 +7,7 @@ const settings = {
     slowMsUpdate: false,
     hideHint: false,
     datePattern: "W, M Do YYYY",
-    font: "sans-serif",
+    font: "Inter",
     textColor: "#ffffff",
     bgColor: "#000000",
     theme: "dark",
@@ -15,18 +15,21 @@ const settings = {
 };
 
 const themeMap = {
-    dark: { bg: "#000000", text: "#ffffff", font: "Inter" },
-    light: { bg: "#ffffff", text: "#000000", font: "Inter" },
-    solarized: { bg: "#002b36", text: "#93a1a1", font: "monospace" },
-    hacker: { bg: "#000000", text: "#00F800", font: "monospace" },
-    moooo: { bg: "#f8f8f8", text: "#222222", font: "Moo Lah Lah" },
-    cherry: { bg: "#f3eded", text: "#fda9a9", font: "Cherry Bomb One" },
-    belgian: { bg: "#e6d9bd", text: "#6f8b6e", font: "Hanalei" },
-    retrowave: { bg: "#14165F", text: "#000000", font: "Honk" },
-    glitchcore: { bg: "#0d0d0d", text: "#ff0033", font: "Rubik Glitch" },
-    ghostscript: { bg: "#f8f8ff", text: "#555555", font: "Tagesschrift" },
-    spaceodyssey: { bg: "#000022", text: "#ffffff", font: "Orbitron" },
-    sakura: { bg: "#ffe4e1", text: "#8b0000", font: "Sawarabi Mincho" }
+    dark: { displayName: "Dark", bg: "#000000", text: "#ffffff", font: "Inter" },
+    light: { displayName: "Light", bg: "#ffffff", text: "#000000", font: "Inter" },
+    belgian: { displayName: "Belgian Evergreen", bg: "#e6d9bd", text: "#6f8b6e", font: "Hanalei" },
+    bluepen: { displayName: "Blue Pen", bg: "#fdfcf7", text: "#1b49d1", font: "Patrick Hand" },
+    cherry: { displayName: "Cherry Blossom", bg: "#f3eded", text: "#fda9a9", font: "Cherry Bomb One" },
+    ghostscript: { displayName: "Ghostscript", bg: "#f8f8ff", text: "#555555", font: "Tagesschrift" },
+    glitchcore: { displayName: "Glitchcore", bg: "#0d0d0d", text: "#ff0033", font: "Rubik Glitch" },
+    hacker: { displayName: "Hacker", bg: "#000000", text: "#00F800", font: "monospace" },
+    holochip: { displayName: "Holo Chip", bg: "#0e0b1e", text: "#ffffff", font: "Nabla" },
+    moooo: { displayName: "Moooo", bg: "#f8f8f8", text: "#222222", font: "Moo Lah Lah" },
+    retrowave: { displayName: "Retrowave", bg: "#14165F", text: "#000000", font: "Honk" },
+    sakura: { displayName: "Sakura", bg: "#ffe4e1", text: "#8b0000", font: "Sawarabi Mincho" },
+    scribblepad: { displayName: "Scribble Pad", bg: "#fffbe6", text: "#2c2c2c", font: "Rubik Scribble" },
+    solarized: { displayName: "Solarized", bg: "#002b36", text: "#93a1a1", font: "monospace" },
+    spaceodyssey: { displayName: "Space Odyssey", bg: "#000022", text: "#ffffff", font: "Orbitron" }
 };
 
 const timeEl = document.getElementById("time");
@@ -185,6 +188,9 @@ function loadSettings() {
     const savedSettings = localStorage.getItem("TCDB_settings");
     if (savedSettings) {
         Object.assign(settings, JSON.parse(savedSettings));
+        if (!themeMap[settings.theme]) {
+            settings.theme = "dark";
+        }
     }
     el24h.checked = settings.use24h;
     elSecs.checked = settings.showSeconds;
@@ -277,5 +283,15 @@ fullscreenBtn.addEventListener("click", () => {
     }
 });
 
-loadSettings();
-startClock();
+document.addEventListener("DOMContentLoaded", () => {
+    const themeSelect = document.getElementById("theme-select");
+    Object.entries(themeMap).forEach(([key, value]) => {
+        const option = document.createElement("option");
+        option.value = key;
+        option.textContent = value.displayName;
+        themeSelect.appendChild(option);
+    });
+
+    loadSettings();
+    startClock();
+});
