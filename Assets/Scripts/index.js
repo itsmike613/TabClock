@@ -8,9 +8,9 @@ const settings = {
     hideHint: false,
     datePattern: "W, M Do YYYY",
     font: "Inter",
-    textColor: "#ffffff",
-    bgColor: "#000000",
-    theme: "dark",
+    textColor: "#000000",
+    bgColor: "#FFFFFF",
+    theme: "light",
     placement: "middle-center"
 };
 
@@ -29,7 +29,8 @@ const themeMap = {
     sakura: { displayName: "Sakura", bg: "#ffe4e1", text: "#8b0000", font: "Sawarabi Mincho" },
     scribblepad: { displayName: "Scribble Pad", bg: "#fffbe6", text: "#2c2c2c", font: "Rubik Scribble" },
     solarized: { displayName: "Solarized", bg: "#002b36", text: "#93a1a1", font: "monospace" },
-    spaceodyssey: { displayName: "Space Odyssey", bg: "#000022", text: "#ffffff", font: "Orbitron" }
+    spaceodyssey: { displayName: "Space Odyssey", bg: "#000022", text: "#ffffff", font: "Orbitron" },
+    puddles: { displayName: "Puddles", bg: "#39ABD0", text: "#EDF1F3", font: "Rubik Puddles" }
 };
 
 const timeEl = document.getElementById("time");
