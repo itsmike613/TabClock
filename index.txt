@@ -1,0 +1,11 @@
+TODO
+________________________________________
+1. Add two inputs for font size (time & date)
+2. Add third color input (Change color of date & time seperatly)
+3. Change icons on settings card (Show milliseconds = same)
+4. Figure out good looking way to describe each date prefix
+5. Make date prefix options more concise (Eliminate usless)
+6. Add background image system
+   - Add image selector (unsplash.com) [Grapgh paper, lined paper, etc.]
+   - Image link input (If image unavaliable - fallback to background color)
+7. Make Element IDs more consistant
