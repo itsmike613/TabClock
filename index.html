@@ -89,12 +89,66 @@
 
             <div class="settings-group">
                 <div class="settings-item flex-column">
-                    <div class="d-flex align-items-center w-100 mb-2">
+                    <div class="d-flex align-items-center mb-2">
                         <i class="ph ph-calendar me-2"></i>
-                        <span>Date Format</span>
+                        <span>Date Display</span>
                     </div>
-                    <input class="form-control form-control-sm" id="date-input" placeholder="e.g. W, MM Do YYYY" />
-                    <small class="form-text text-muted mt-1">YYYY, YY, MM, mm, M, m, WW, W, w, Q, Qo, DD, D, Do, DDD, DDDo — You can also add text/emojis.</small>
+                    <div class="w-100 mb-2">
+                        <label for="date-input" class="form-label small">Date Format</label>
+                        <input class="form-control form-control-sm" id="date-input" placeholder="e.g. W, MM Do YYYY" />
+                    </div>
+
+                    <div class="w-100 mb-2">
+                        <label class="form-label small">Date Templates</label>
+                        <select class="form-select form-select-sm" onchange="const input = document.getElementById('date-input');input.value = this.value;input.dispatchEvent(new Event('input', { bubbles: true }));">
+                            <option value="W, M Do YYYY">Monday, Jun 2nd 2025 (default)</option>
+                            <option value="DDDo day of YYYY">154th day of 2025</option>
+                            <option value="WW week of YYYY">23 week of 2025</option>
+                            <option value="mm/DD/YYYY">06/02/2025</option>
+                            <option value="m/D/YY">6/2/25</option>
+                        </select>
+                    </div>
+
+                    <div class="w-100 mb-2">
+                        <button type="button" class="btn btn-sm btn-outline-secondary w-100" data-bs-toggle="modal"
+                            data-bs-target="#dateHelpModal">
+                            Help with date
+                        </button>
+                    </div>
+                    <div class="modal fade" id="dateHelpModal" tabindex="-1" aria-labelledby="dateHelpModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="dateHelpModalLabel">Date Format Help</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body small">
+                                    <p>Use the prefixes below to format your date. You can also add your own text or emojis to customize the display.</p>
+                                    <ul>
+                                        <li><strong>YYYY</strong> - Full year (e.g. 2025)</li>
+                                        <li><strong>YY</strong> - Last two digits of year (e.g. 25)</li>
+                                        <li><strong>MM</strong> - Full month name (e.g. June)</li>
+                                        <li><strong>mm</strong> - Month number, zero-padded (e.g. 06)</li>
+                                        <li><strong>M</strong> - Month abbreviation (e.g. Jun)</li>
+                                        <li><strong>m</strong> - Month number (e.g. 6)</li>
+                                        <li><strong>DD</strong> - Day number, zero-padded (e.g. 02)</li>
+                                        <li><strong>D</strong> - Day number (e.g. 2)</li>
+                                        <li><strong>Do</strong> - Day with ordinal (e.g. 2nd)</li>
+                                        <li><strong>DDD</strong> - Day of the year (e.g. 154)</li>
+                                        <li><strong>DDDo</strong> - Day of the year with ordinal (e.g. 154th)</li>
+                                        <li><strong>W</strong> - Full weekday name (e.g. Monday)</li>
+                                        <li><strong>w</strong> - Weekday abbreviation (e.g. Mon)</li>
+                                        <li><strong>WW</strong> - ISO week number of the year (e.g. 23)</li>
+                                        <li><strong>Q</strong> - Quarter number (e.g. 2)</li>
+                                        <li><strong>Qo</strong> - Quarter with ordinal (e.g. 2nd)</li>
+                                    </ul>
+                                    <p>Selecting a date template will clear the date format input and insert the corresponding prefix code for the chosen display.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
