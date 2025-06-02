@@ -46,23 +46,6 @@ html::-webkit-scrollbar {
     justify-content: center;
 }
 
-.settings-panel {
-    background: #fff;
-    border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-}
-
-.settings-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-}
-
 .settings-group {
     margin-bottom: 20px;
 }
