@@ -34,52 +34,55 @@
     <div class="section" id="settings">
         <div class="card">
             <div class="card-body">
-                <h2 class="card-title"><i class="ph ph-gear me-2"></i> Settings</h2>
+                <div class="d-flex mb-3">
+                    <i class="ph ph-gear me-2 text-muted"></i>
+                    <span class="text-muted small fw-bold">SETTINGS</span>
+                </div>
 
-                <div class="settings-group">
-                    <div class="settings-item">
+                <div class="border-bottom pb-4 mb-4">
+                    <div class="d-flex align-items-center mb-3">
                         <i class="ph ph-clock me-2"></i>
                         <label class="form-check-label" for="toggle-24h">24-Hour Format</label>
                         <div class="form-check form-switch ms-auto">
                             <input class="form-check-input" type="checkbox" id="toggle-24h">
                         </div>
                     </div>
-                    <div class="settings-item">
+                    <div class="d-flex align-items-center mb-3">
                         <i class="ph ph-timer me-2"></i>
                         <label class="form-check-label" for="toggle-seconds">Show Seconds</label>
                         <div class="form-check form-switch ms-auto">
                             <input class="form-check-input" type="checkbox" id="toggle-seconds">
                         </div>
                     </div>
-                    <div class="settings-item">
+                    <div class="d-flex align-items-center mb-3">
                         <i class="ph ph-sun me-2"></i>
                         <label class="form-check-label" for="toggle-ampm">Show AM/PM</label>
                         <div class="form-check form-switch ms-auto">
                             <input class="form-check-input" type="checkbox" id="toggle-ampm">
                         </div>
                     </div>
-                    <div class="settings-item">
-                        <i class="ph ph-calendar-check me-2"></i>
-                        <label class="form-check-label" for="toggle-date">Show Date</label>
-                        <div class="form-check form-switch ms-auto">
-                            <input class="form-check-input" type="checkbox" id="toggle-date">
-                        </div>
-                    </div>
-                    <div class="settings-item">
-                        <i class="ph ph-timer me-2"></i>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="ph ph-hourglass-low me-2"></i>
                         <label class="form-check-label" for="toggle-milliseconds">Show Milliseconds</label>
                         <div class="form-check form-switch ms-auto">
                             <input class="form-check-input" type="checkbox" id="toggle-milliseconds">
                         </div>
                     </div>
-                    <div class="settings-item">
+                    <div class="d-flex align-items-center mb-3">
                         <i class="ph ph-speedometer me-2"></i>
                         <label class="form-check-label" for="toggle-slow-ms">Slower Millisecond Update</label>
                         <div class="form-check form-switch ms-auto">
                             <input class="form-check-input" type="checkbox" id="toggle-slow-ms">
                         </div>
                     </div>
-                    <div class="settings-item">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="ph ph-calendar-check me-2"></i>
+                        <label class="form-check-label" for="toggle-date">Show Date</label>
+                        <div class="form-check form-switch ms-auto">
+                            <input class="form-check-input" type="checkbox" id="toggle-date">
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
                         <i class="ph ph-eye-slash me-2"></i>
                         <label class="form-check-label" for="toggle-hint">Hide Scroll Hint</label>
                         <div class="form-check form-switch ms-auto">
@@ -88,18 +91,18 @@
                     </div>
                 </div>
 
-                <div class="settings-group">
-                    <div class="settings-item flex-column">
-                        <div class="d-flex align-items-center mb-2">
-                            <i class="ph ph-calendar me-2"></i>
-                            <span>Date Display</span>
+                <div class="border-bottom pb-4 mb-4">
+                    <div class="d-flex mb-3 flex-column">
+                        <div class="d-flex mb-3">
+                            <i class="ph ph-calendar me-2 text-muted"></i>
+                            <span class="text-muted small fw-bold">DATE DISPLAY</span>
                         </div>
                         <div class="w-100 mb-2">
                             <label for="date-input" class="form-label small">Date Format</label>
-                            <input class="form-control form-control-sm" id="date-input" placeholder="e.g. W, MM Do YYYY" />
+                            <input class="form-control form-control-sm" id="date-input" placeholder="e.g. W, MM Do YYYY" oninput="const s = document.querySelector('select'), v = this.value;s.value = [...s.options].some(o => o.value === v) ? v : '';" />
                         </div>
 
-                        <div class="w-100 mb-2">
+                        <div class="w-100 mb-3">
                             <label class="form-label small">Date Templates</label>
                             <select class="form-select form-select-sm" onchange="const input = document.getElementById('date-input');input.value = this.value;input.dispatchEvent(new Event('input', { bubbles: true }));">
                                 <option value="" selected disabled>Select one</option>
@@ -151,11 +154,11 @@
                     </div>
                 </div>
 
-                <div class="settings-group">
-                    <div class="settings-item flex-column">
-                        <div class="d-flex align-items-center mb-2">
-                            <i class="ph ph-paint-brush me-2"></i>
-                            <span>Appearance</span>
+                <div class="border-bottom pb-4 mb-4">
+                    <div class="d-flex mb-3 flex-column">
+                        <div class="d-flex mb-3">
+                            <i class="ph ph-paint-brush-broad me-2 text-muted"></i>
+                            <span class="text-muted small fw-bold">APPEARANCE</span>
                         </div>
                         <div class="w-100 mb-2">
                             <label for="theme-select" class="form-label small">Theme</label>

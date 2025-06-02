@@ -2,121 +2,80 @@
 
 html,
 body {
-    margin: 0;
-    padding: 0;
-    scroll-behavior: smooth;
-    font-family: sans-serif;
-    overflow-x: hidden;
+	margin: 0;
+	padding: 0;
+	scroll-behavior: smooth;
+	font-family: sans-serif;
+	overflow-x: hidden;
 }
 
 html {
-    overflow-y: scroll;
-    scrollbar-width: none;
+	overflow-y: scroll;
+	scrollbar-width: none;
 }
 
 html::-webkit-scrollbar {
-    display: none;
+	display: none;
 }
 
 .section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
 }
 
 #clock {
-    height: 100vh;
-    width: 100vw;
-    background: black;
-    color: white;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+	height: 100vh;
+	width: 100vw;
+	background: black;
+	color: white;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 #settings {
-    background: #f8f9fa;
-    padding: 60px 0;
-    display: flex;
-    justify-content: center;
-}
-
-.settings-group {
-    margin-bottom: 20px;
-}
-
-.settings-group:not(:last-child) {
-    border-bottom: 1px solid #e9ecef;
-    padding-bottom: 20px;
-}
-
-.settings-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.settings-item.flex-column {
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.settings-item .form-check {
-    margin-bottom: 0;
-}
-
-.settings-item .form-check-input {
-    margin-top: 0;
-}
-
-.settings-item .form-label {
-    margin-bottom: 2px;
-    font-size: 0.875rem;
+	background: #f8f9fa;
+	padding: 60px 0;
+	display: flex;
+	justify-content: center;
 }
 
 .ph {
-    font-size: 1.25rem;
-    color: #6c757d;
-}
-
-.settings-footer {
-    margin-top: 20px;
+	font-size: 1.25rem;
+	color: #6c757d;
 }
 
 #time {
-    font-size: 5em;
+	font-size: 5em;
 }
 
 #date {
-    font-size: 2em;
-    margin-top: 20px;
+	font-size: 2em;
+	margin-top: 20px;
 }
 
 #scroll-indicator {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1.5em;
-    color: white;
-    opacity: 0.5;
-}
-
-#settings::-webkit-scrollbar {
-    display: none;
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 1.5em;
+	color: white;
+	opacity: 0.5;
 }
 
 @media (max-width: 600px) {
-    #time {
-        font-size: 3em;
-    }
+	#time {
+		font-size: 3em;
+	}
 
-    #date {
-        font-size: 1.5em;
-    }
+	#date {
+		font-size: 1.5em;
+	}
 }
