@@ -11,26 +11,30 @@ const settings = {
     textColor: "#000000",
     bgColor: "#FFFFFF",
     theme: "light",
-    placement: "middle-center"
+    placement: "middle-center",
+    clockFontSize: "80px",
+    dateFontSize: "32px",
+    backgroundImage: "None"
 };
 
 const themeMap = {
-    dark: { displayName: "Dark", bg: "#000000", text: "#ffffff", font: "Inter" },
-    light: { displayName: "Light", bg: "#ffffff", text: "#000000", font: "Inter" },
-    belgian: { displayName: "Belgian Evergreen", bg: "#e6d9bd", text: "#6f8b6e", font: "Hanalei" },
-    bluepen: { displayName: "Blue Pen", bg: "#fdfcf7", text: "#1b49d1", font: "Patrick Hand" },
-    cherry: { displayName: "Cherry Blossom", bg: "#f3eded", text: "#fda9a9", font: "Cherry Bomb One" },
-    ghostscript: { displayName: "Ghostscript", bg: "#f8f8ff", text: "#555555", font: "Tagesschrift" },
-    glitchcore: { displayName: "Glitchcore", bg: "#0d0d0d", text: "#ff0033", font: "Rubik Glitch" },
-    hacker: { displayName: "Hacker", bg: "#000000", text: "#00F800", font: "monospace" },
-    holochip: { displayName: "Holo Chip", bg: "#0e0b1e", text: "#ffffff", font: "Nabla" },
-    moooo: { displayName: "Moooo", bg: "#f8f8f8", text: "#222222", font: "Moo Lah Lah" },
-    retrowave: { displayName: "Retrowave", bg: "#14165F", text: "#000000", font: "Honk" },
-    sakura: { displayName: "Sakura", bg: "#ffe4e1", text: "#8b0000", font: "Sawarabi Mincho" },
-    scribblepad: { displayName: "Scribble Pad", bg: "#fffbe6", text: "#2c2c2c", font: "Rubik Scribble" },
-    solarized: { displayName: "Solarized", bg: "#002b36", text: "#93a1a1", font: "monospace" },
-    spaceodyssey: { displayName: "Space Odyssey", bg: "#000022", text: "#ffffff", font: "Orbitron" },
-    puddles: { displayName: "Puddles", bg: "#39ABD0", text: "#EDF1F3", font: "Rubik Puddles" }
+    dark: { displayName: "Dark", bg: "#000000", text: "#ffffff", font: "Inter", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
+    light: { displayName: "Light", bg: "#ffffff", text: "#000000", font: "Inter", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
+    belgian: { displayName: "Belgian Evergreen", bg: "#e6d9bd", text: "#6f8b6e", font: "Hanalei", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
+    bluepen: { displayName: "Blue Pen", bg: "#fdfcf7", text: "#1b49d1", font: "Patrick Hand", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
+    cherry: { displayName: "Cherry Blossom", bg: "#f3eded", text: "#fda9a9", font: "Cherry Bomb One", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
+    ghostscript: { displayName: "Ghostscript", bg: "#f8f8ff", text: "#555555", font: "Tagesschrift", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
+    glitchcore: { displayName: "Glitchcore", bg: "#0d0d0d", text: "#ff0033", font: "Rubik Glitch", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
+    hacker: { displayName: "Hacker", bg: "#000000", text: "#00F800", font: "monospace", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
+    holochip: { displayName: "Holo Chip", bg: "#0e0b1e", text: "#ffffff", font: "Nabla", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
+    moooo: { displayName: "Moooo", bg: "#f8f8f8", text: "#222222", font: "Moo Lah Lah", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
+    retrowave: { displayName: "Retrowave", bg: "#14165F", text: "#000000", font: "Honk", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
+    sakura: { displayName: "Sakura", bg: "#ffe4e1", text: "#8b0000", font: "Sawarabi Mincho", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
+    scribblepad: { displayName: "Scribble Pad", bg: "#fffbe6", text: "#2c2c2c", font: "Rubik Scribble", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
+    solarized: { displayName: "Solarized", bg: "#002b36", text: "#93a1a1", font: "monospace", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
+    spaceodyssey: { displayName: "Space Odyssey", bg: "#000022", text: "#ffffff", font: "Orbitron", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
+    puddles: { displayName: "Puddles", bg: "#39ABD0", text: "#EDF1F3", font: "Rubik Puddles", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
+    patrick: { displayName: "Patrick", bg: "#ffffff", text: "#ffffff", font: "Patrick Hand", backgroundImage: "Assets/Images/Backgrounds/patrick.jpg", placement: "top-right", clockFontSize: "80px", dateFontSize: "32px" }
 };
 
 const timeEl = document.getElementById("time");
@@ -50,6 +54,9 @@ const elText = document.getElementById("text-color");
 const elBack = document.getElementById("bg-color");
 const elPlacement = document.getElementById("placement-select");
 const fullscreenBtn = document.getElementById("fullscreen-btn");
+const elClockFontSize = document.getElementById("clock-fontsize");
+const elDateFontSize = document.getElementById("date-fontsize");
+const elBackgroundImg = document.getElementById("background-img");
 
 const settingHandlers = [
     { el: el24h, key: "use24h", event: "change", action: () => toggleAMPMState() },
@@ -64,7 +71,10 @@ const settingHandlers = [
     { el: elText, key: "textColor", event: "input", action: () => updateAppearance() },
     { el: elBack, key: "bgColor", event: "input", action: () => updateAppearance() },
     { el: elTheme, key: "theme", event: "change", action: () => applyTheme(settings.theme) },
-    { el: elPlacement, key: "placement", event: "change", action: () => updateAppearance() }
+    { el: elPlacement, key: "placement", event: "change", action: () => updateAppearance() },
+    { el: elClockFontSize, key: "clockFontSize", event: "change", action: () => updateAppearance() },
+    { el: elDateFontSize, key: "dateFontSize", event: "change", action: () => updateAppearance() },
+    { el: elBackgroundImg, key: "backgroundImage", event: "change", action: () => updateAppearance() }
 ];
 
 settingHandlers.forEach(({ el, key, event, action }) => {
@@ -161,6 +171,10 @@ function applyTheme(theme) {
     settings.bgColor = t.bg;
     settings.textColor = t.text;
     settings.font = t.font;
+    settings.backgroundImage = t.backgroundImage;
+    settings.placement = t.placement;
+    settings.clockFontSize = t.clockFontSize;
+    settings.dateFontSize = t.dateFontSize;
     updateAppearance();
 }
 
@@ -168,17 +182,28 @@ function updateAppearance() {
     clockEl.style.backgroundColor = settings.bgColor;
     clockEl.style.color = settings.textColor;
     clockEl.style.fontFamily = settings.font;
-
+    timeEl.style.fontSize = settings.clockFontSize;
+    dateEl.style.fontSize = settings.dateFontSize;
     const [vertical, horizontal] = settings.placement.split("-");
     const justifyMap = { top: "flex-start", middle: "center", bottom: "flex-end" };
     const alignMap = { left: "flex-start", center: "center", right: "flex-end" };
     clockEl.style.justifyContent = justifyMap[vertical];
     clockEl.style.alignItems = alignMap[horizontal];
-
     elBack.value = settings.bgColor;
     elText.value = settings.textColor;
     elFont.value = settings.font;
     elPlacement.value = settings.placement;
+    elClockFontSize.value = settings.clockFontSize;
+    elDateFontSize.value = settings.dateFontSize;
+
+    if (settings.backgroundImage === "None") {
+        clockEl.style.backgroundImage = "none";
+        clockEl.style.backgroundColor = settings.bgColor;
+    } else {
+        clockEl.style.backgroundImage = `url('${settings.backgroundImage}')`;
+        clockEl.style.backgroundSize = "cover";
+        clockEl.style.backgroundPosition = "center";
+    }
 }
 
 function saveSettings() {
@@ -189,9 +214,7 @@ function loadSettings() {
     const savedSettings = localStorage.getItem("TCDB_settings");
     if (savedSettings) {
         Object.assign(settings, JSON.parse(savedSettings));
-        if (!themeMap[settings.theme]) {
-            settings.theme = "dark";
-        }
+        if (!themeMap[settings.theme]) settings.theme = "dark";
     }
     el24h.checked = settings.use24h;
     elSecs.checked = settings.showSeconds;
@@ -206,7 +229,9 @@ function loadSettings() {
     elText.value = settings.textColor;
     elBack.value = settings.bgColor;
     elPlacement.value = settings.placement;
-
+    elClockFontSize.value = settings.clockFontSize;
+    elDateFontSize.value = settings.dateFontSize;
+    elBackgroundImg.value = settings.backgroundImage;
     toggleAMPMState();
     toggleSlowMsState();
     updateAppearance();

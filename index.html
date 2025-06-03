@@ -55,13 +55,6 @@
                         </div>
                     </div>
                     <div class="d-flex align-items-center mb-3">
-                        <i class="ph ph-sun me-2"></i>
-                        <label class="form-check-label" for="toggle-ampm">Show AM/PM</label>
-                        <div class="form-check form-switch ms-auto">
-                            <input class="form-check-input" type="checkbox" id="toggle-ampm">
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center mb-3">
                         <i class="ph ph-hourglass-low me-2"></i>
                         <label class="form-check-label" for="toggle-milliseconds">Show Milliseconds</label>
                         <div class="form-check form-switch ms-auto">
@@ -73,6 +66,13 @@
                         <label class="form-check-label" for="toggle-slow-ms">Slower Millisecond Update</label>
                         <div class="form-check form-switch ms-auto">
                             <input class="form-check-input" type="checkbox" id="toggle-slow-ms">
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="ph ph-sun me-2"></i>
+                        <label class="form-check-label" for="toggle-ampm">Show AM/PM</label>
+                        <div class="form-check form-switch ms-auto">
+                            <input class="form-check-input" type="checkbox" id="toggle-ampm">
                         </div>
                     </div>
                     <div class="d-flex align-items-center mb-3">
@@ -163,7 +163,7 @@
                         <div class="w-100 mb-2">
                             <label for="theme-select" class="form-label small">Theme</label>
                             <select class="form-select form-select-sm" id="theme-select"></select>
-                            <small class="form-text text-muted">Note: Selecting a theme overrides custom colors and font.</small>
+                            <small class="form-text text-muted">Note: Selecting a theme overrides all settings below.</small>
                         </div>
                         <div class="w-100 mb-2">
                             <label for="font-select" class="form-label small">Font</label>
@@ -218,6 +218,18 @@
                             <input type="color" class="form-control form-control-sm" id="bg-color">
                         </div>
                         <div class="w-100 mb-2">
+                            <label for="background-img" class="form-label small">Background Image</label>
+                            <select class="form-select form-select-sm" id="background-img">
+                                <option value="None" selected>None</option>
+                                <option value="Assets/Images/Backgrounds/beach.jpg">Beach</option>
+                                <option value="Assets/Images/Backgrounds/marty.jpg">Marty</option>
+                                <option value="Assets/Images/Backgrounds/paper.jpg">Paper</option>
+                                <option value="Assets/Images/Backgrounds/patrick.jpg">Patrick</option>
+                                <option value="Assets/Images/Backgrounds/sunset.jpg">Sunset</option>
+                                <option value="Assets/Images/Backgrounds/rocks.jpg">Rocks</option>
+                            </select>
+                        </div>
+                        <div class="w-100 mb-2">
                             <label for="placement-select" class="form-label small">Clock Placement</label>
                             <select class="form-select form-select-sm" id="placement-select">
                                 <option value="top-left">Top Left</option>
@@ -229,6 +241,40 @@
                                 <option value="bottom-left">Bottom Left</option>
                                 <option value="bottom-center">Bottom Center</option>
                                 <option value="bottom-right">Bottom Right</option>
+                            </select>
+                        </div>
+                        <div class="w-100 mb-2">
+                            <label for="clock-fontsize" class="form-label small">Clock Font Size</label>
+                            <select class="form-select form-select-sm" id="clock-fontsize">
+                                <option value="30px">1</option>
+                                <option value="40px">2</option>
+                                <option value="50px">3</option>
+                                <option value="60px">4</option>
+                                <option value="70px">5</option>
+                                <option value="80px">6 (default)</option>
+                                <option value="90px">7</option>
+                                <option value="100px">8</option>
+                                <option value="110px">9</option>
+                                <option value="120px">10 (teacher mode)</option>
+                                <option value="130px">11</option>
+                                <option value="140px">12</option>
+                            </select>
+                        </div>
+                        <div class="w-100 mb-2">
+                            <label for="date-fontsize" class="form-label small">Date Font Size</label>
+                            <select class="form-select form-select-sm" id="date-fontsize">
+                                <option value="32px">1 (default)</option>
+                                <option value="40px">2</option>
+                                <option value="50px">3</option>
+                                <option value="60px">4 (teacher mode)</option>
+                                <option value="70px">5</option>
+                                <option value="80px">6</option>
+                                <option value="90px">7</option>
+                                <option value="100px">8</option>
+                                <option value="110px">9</option>
+                                <option value="120px">10</option>
+                                <option value="130px">11</option>
+                                <option value="140px">12</option>
                             </select>
                         </div>
                     </div>
