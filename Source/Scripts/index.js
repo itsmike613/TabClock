@@ -34,7 +34,7 @@ const themeMap = {
     solarized: { displayName: "Solarized", bg: "#002b36", text: "#93a1a1", font: "monospace", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
     spaceodyssey: { displayName: "Space Odyssey", bg: "#000022", text: "#ffffff", font: "Orbitron", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
     puddles: { displayName: "Puddles", bg: "#39ABD0", text: "#EDF1F3", font: "Rubik Puddles", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
-    patrick: { displayName: "Patrick", bg: "#ffffff", text: "#000000", font: "Patrick Hand", backgroundImage: "Assets/Images/Backgrounds/patrick.jpg", placement: "top-right", clockFontSize: "80px", dateFontSize: "32px" }
+    patrick: { displayName: "Patrick", bg: "#ffffff", text: "#000000", font: "Patrick Hand", backgroundImage: "Source/Images/Backgrounds/patrick.jpg", placement: "top-right", clockFontSize: "80px", dateFontSize: "32px" }
 };
 
 const timeEl = document.getElementById("time");
