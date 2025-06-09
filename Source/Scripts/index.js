@@ -34,47 +34,47 @@ const themeMap = {
     solarized: { displayName: "Solarized", bg: "#002b36", text: "#93a1a1", font: "monospace", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
     spaceodyssey: { displayName: "Space Odyssey", bg: "#000022", text: "#ffffff", font: "Orbitron", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
     puddles: { displayName: "Puddles", bg: "#39ABD0", text: "#EDF1F3", font: "Rubik Puddles", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
-    patrick: { displayName: "Patrick", bg: "#ffffff", text: "#000000", font: "Patrick Hand", backgroundImage: "Source/Images/Backgrounds/patrick.jpg", placement: "top-right", clockFontSize: "80px", dateFontSize: "32px" }
+    patrick: { displayName: "Patrick", bg: "#000000", text: "#F8F8FF", font: "Patrick Hand", backgroundImage: "Source/Images/Backgrounds/patrick.jpg", placement: "top-right", clockFontSize: "80px", dateFontSize: "32px" }
 };
 
-const timeEl = document.getElementById("time");
-const dateEl = document.getElementById("date");
-const clockEl = document.getElementById("clock");
-const el24h = document.getElementById("toggle-24h");
-const elSecs = document.getElementById("toggle-seconds");
-const elAMPM = document.getElementById("toggle-ampm");
-const elShowDate = document.getElementById("toggle-date");
-const elShowMilliseconds = document.getElementById("toggle-milliseconds");
-const elSlowMs = document.getElementById("toggle-slow-ms");
-const elHideHint = document.getElementById("toggle-hint");
-const elDateInput = document.getElementById("date-input");
-const elFont = document.getElementById("font-select");
-const elTheme = document.getElementById("theme-select");
-const elText = document.getElementById("text-color");
-const elBack = document.getElementById("bg-color");
-const elPlacement = document.getElementById("placement-select");
-const fullscreenBtn = document.getElementById("fullscreen-btn");
-const elClockFontSize = document.getElementById("clock-fontsize");
-const elDateFontSize = document.getElementById("date-fontsize");
-const elBackgroundImg = document.getElementById("background-img");
+const el_time = document.getElementById("time");
+const el_date = document.getElementById("date");
+const el_clck = document.getElementById("clock");
+const el_1224 = document.getElementById("toggle-24h");
+const el_secs = document.getElementById("toggle-seconds");
+const el_ampm = document.getElementById("toggle-ampm");
+const el_dtog = document.getElementById("toggle-date");
+const el_mtog = document.getElementById("toggle-milliseconds");
+const el_slow = document.getElementById("toggle-slow-ms");
+const el_htog = document.getElementById("toggle-hint");
+const el_dtin = document.getElementById("date-input");
+const el_font = document.getElementById("font-select");
+const el_thme = document.getElementById("theme-select");
+const el_text = document.getElementById("text-color");
+const el_back = document.getElementById("bg-color");
+const el_plcm = document.getElementById("placement-select");
+const el_full = document.getElementById("fullscreen-btn");
+const el_ckfs = document.getElementById("clock-fontsize");
+const el_dtfs = document.getElementById("date-fontsize");
+const el_bgim = document.getElementById("background-img");
 
 const settingHandlers = [
-    { el: el24h, key: "use24h", event: "change", action: () => toggleAMPMState() },
-    { el: elSecs, key: "showSeconds", event: "change" },
-    { el: elAMPM, key: "showAMPM", event: "change" },
-    { el: elShowDate, key: "showDate", event: "change" },
-    { el: elShowMilliseconds, key: "showMilliseconds", event: "change", action: () => { toggleSlowMsState(); updateClock(); } },
-    { el: elSlowMs, key: "slowMsUpdate", event: "change" },
-    { el: elHideHint, key: "hideHint", event: "change", action: () => updateClock() },
-    { el: elDateInput, key: "datePattern", event: "input" },
-    { el: elFont, key: "font", event: "change", action: () => updateAppearance() },
-    { el: elText, key: "textColor", event: "input", action: () => updateAppearance() },
-    { el: elBack, key: "bgColor", event: "input", action: () => updateAppearance() },
-    { el: elTheme, key: "theme", event: "change", action: () => applyTheme(settings.theme) },
-    { el: elPlacement, key: "placement", event: "change", action: () => updateAppearance() },
-    { el: elClockFontSize, key: "clockFontSize", event: "change", action: () => updateAppearance() },
-    { el: elDateFontSize, key: "dateFontSize", event: "change", action: () => updateAppearance() },
-    { el: elBackgroundImg, key: "backgroundImage", event: "change", action: () => updateAppearance() }
+    { el: el_1224, key: "use24h", event: "change", action: () => toggleAMPMState() },
+    { el: el_secs, key: "showSeconds", event: "change" },
+    { el: el_ampm, key: "showAMPM", event: "change" },
+    { el: el_dtog, key: "showDate", event: "change" },
+    { el: el_mtog, key: "showMilliseconds", event: "change", action: () => { toggleSlowMsState(); updateClock(); } },
+    { el: el_slow, key: "slowMsUpdate", event: "change" },
+    { el: el_htog, key: "hideHint", event: "change", action: () => updateClock() },
+    { el: el_dtin, key: "datePattern", event: "input" },
+    { el: el_font, key: "font", event: "change", action: () => updateAppearance() },
+    { el: el_text, key: "textColor", event: "input", action: () => updateAppearance() },
+    { el: el_back, key: "bgColor", event: "input", action: () => updateAppearance() },
+    { el: el_thme, key: "theme", event: "change", action: () => applyTheme(settings.theme) },
+    { el: el_plcm, key: "placement", event: "change", action: () => updateAppearance() },
+    { el: el_ckfs, key: "clockFontSize", event: "change", action: () => updateAppearance() },
+    { el: el_dtfs, key: "dateFontSize", event: "change", action: () => updateAppearance() },
+    { el: el_bgim, key: "backgroundImage", event: "change", action: () => updateAppearance() }
 ];
 
 settingHandlers.forEach(({ el, key, event, action }) => {
@@ -160,9 +160,9 @@ function formatTime(now) {
 function updateClock() {
     const now = new Date();
     const timeString = formatTime(now);
-    timeEl.textContent = timeString;
-    dateEl.textContent = formatDate(now);
-    dateEl.style.display = settings.showDate ? "block" : "none";
+    el_time.textContent = timeString;
+    el_date.textContent = formatDate(now);
+    el_date.style.display = settings.showDate ? "block" : "none";
     document.getElementById("scroll-indicator").style.display = settings.hideHint ? "none" : "block";
 }
 
@@ -179,31 +179,31 @@ function applyTheme(theme) {
 }
 
 function updateAppearance() {
-    clockEl.style.backgroundColor = settings.bgColor;
-    clockEl.style.color = settings.textColor;
-    clockEl.style.fontFamily = settings.font;
-    timeEl.style.fontSize = settings.clockFontSize;
-    dateEl.style.fontSize = settings.dateFontSize;
+    el_clck.style.backgroundColor = settings.bgColor;
+    el_clck.style.color = settings.textColor;
+    el_clck.style.fontFamily = settings.font;
+    el_time.style.fontSize = settings.clockFontSize;
+    el_date.style.fontSize = settings.dateFontSize;
     const [vertical, horizontal] = settings.placement.split("-");
     const justifyMap = { top: "flex-start", middle: "center", bottom: "flex-end" };
     const alignMap = { left: "flex-start", center: "center", right: "flex-end" };
-    clockEl.style.justifyContent = justifyMap[vertical];
-    clockEl.style.alignItems = alignMap[horizontal];
-    elBack.value = settings.bgColor;
-    elText.value = settings.textColor;
-    elFont.value = settings.font;
-    elPlacement.value = settings.placement;
-    elClockFontSize.value = settings.clockFontSize;
-    elDateFontSize.value = settings.dateFontSize;
-    elBackgroundImg.value = settings.backgroundImage;
+    el_clck.style.justifyContent = justifyMap[vertical];
+    el_clck.style.alignItems = alignMap[horizontal];
+    el_back.value = settings.bgColor;
+    el_text.value = settings.textColor;
+    el_font.value = settings.font;
+    el_plcm.value = settings.placement;
+    el_ckfs.value = settings.clockFontSize;
+    el_dtfs.value = settings.dateFontSize;
+    el_bgim.value = settings.backgroundImage;
 
     if (settings.backgroundImage === "None") {
-        clockEl.style.backgroundImage = "none";
-        clockEl.style.backgroundColor = settings.bgColor;
+        el_clck.style.backgroundImage = "none";
+        el_clck.style.backgroundColor = settings.bgColor;
     } else {
-        clockEl.style.backgroundImage = `url('${settings.backgroundImage}')`;
-        clockEl.style.backgroundSize = "cover";
-        clockEl.style.backgroundPosition = "center";
+        el_clck.style.backgroundImage = `url('${settings.backgroundImage}')`;
+        el_clck.style.backgroundSize = "cover";
+        el_clck.style.backgroundPosition = "center";
     }
 }
 
@@ -217,22 +217,22 @@ function loadSettings() {
         Object.assign(settings, JSON.parse(savedSettings));
         if (!themeMap[settings.theme]) settings.theme = "dark";
     }
-    el24h.checked = settings.use24h;
-    elSecs.checked = settings.showSeconds;
-    elAMPM.checked = settings.showAMPM;
-    elShowDate.checked = settings.showDate;
-    elShowMilliseconds.checked = settings.showMilliseconds;
-    elSlowMs.checked = settings.slowMsUpdate;
-    elHideHint.checked = settings.hideHint;
-    elDateInput.value = settings.datePattern;
-    elFont.value = settings.font;
-    elTheme.value = settings.theme;
-    elText.value = settings.textColor;
-    elBack.value = settings.bgColor;
-    elPlacement.value = settings.placement;
-    elClockFontSize.value = settings.clockFontSize;
-    elDateFontSize.value = settings.dateFontSize;
-    elBackgroundImg.value = settings.backgroundImage;
+    el_1224.checked = settings.use24h;
+    el_secs.checked = settings.showSeconds;
+    el_ampm.checked = settings.showAMPM;
+    el_dtog.checked = settings.showDate;
+    el_mtog.checked = settings.showMilliseconds;
+    el_slow.checked = settings.slowMsUpdate;
+    el_htog.checked = settings.hideHint;
+    el_dtin.value = settings.datePattern;
+    el_font.value = settings.font;
+    el_thme.value = settings.theme;
+    el_text.value = settings.textColor;
+    el_back.value = settings.bgColor;
+    el_plcm.value = settings.placement;
+    el_ckfs.value = settings.clockFontSize;
+    el_dtfs.value = settings.dateFontSize;
+    el_bgim.value = settings.backgroundImage;
     toggleAMPMState();
     toggleSlowMsState();
     updateAppearance();
@@ -241,21 +241,21 @@ function loadSettings() {
 
 function toggleAMPMState() {
     if (settings.use24h) {
-        elAMPM.checked = false;
-        elAMPM.disabled = true;
+        el_ampm.checked = false;
+        el_ampm.disabled = true;
         settings.showAMPM = false;
     } else {
-        elAMPM.disabled = false;
+        el_ampm.disabled = false;
     }
 }
 
 function toggleSlowMsState() {
     if (!settings.showMilliseconds) {
-        elSlowMs.checked = false;
-        elSlowMs.disabled = true;
+        el_slow.checked = false;
+        el_slow.disabled = true;
         settings.slowMsUpdate = false;
     } else {
-        elSlowMs.disabled = false;
+        el_slow.disabled = false;
     }
 }
 
@@ -264,36 +264,17 @@ let lastDateString = "";
 let lastMsUpdate = 0;
 
 function updateClock() {
-    const now = new Date();
-    const currentTime = now.getTime();
-
-    let shouldUpdateTime = true;
-    if (settings.showMilliseconds && settings.slowMsUpdate) {
-        if (currentTime - lastMsUpdate < 100) {
-            shouldUpdateTime = false;
-        }
+    const now = new Date(), t = now.getTime();
+    if (!settings.showMilliseconds || !settings.slowMsUpdate || t - lastMsUpdate >= 100) {
+        const ts = formatTime(now);
+        if (ts !== lastTimeString) el_time.textContent = lastTimeString = ts;
+        lastMsUpdate = t;
     }
-
-    if (shouldUpdateTime) {
-        const timeString = formatTime(now);
-        if (timeString !== lastTimeString) {
-            timeEl.textContent = timeString;
-            lastTimeString = timeString;
-        }
-        lastMsUpdate = currentTime;
-    }
-
     if (settings.showDate) {
-        const dateString = formatDate(now);
-        if (dateString !== lastDateString) {
-            dateEl.textContent = dateString;
-            lastDateString = dateString;
-        }
-        dateEl.style.display = "block";
-    } else {
-        dateEl.style.display = "none";
-    }
-
+        const ds = formatDate(now);
+        if (ds !== lastDateString) el_date.textContent = lastDateString = ds;
+        el_date.style.display = "block";
+    } else el_date.style.display = "none";
     document.getElementById("scroll-indicator").style.display = settings.hideHint ? "none" : "block";
     requestAnimationFrame(updateClock);
 }
@@ -302,13 +283,7 @@ function startClock() {
     updateClock();
 }
 
-fullscreenBtn.addEventListener("click", () => {
-    if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
-    } else {
-        document.exitFullscreen();
-    }
-});
+el_full.onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
 
 document.addEventListener("DOMContentLoaded", () => {
     const themeSelect = document.getElementById("theme-select");

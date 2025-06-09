@@ -5,4 +5,4 @@ ________________________________________
 2. Add more date prefix options
    - Especially to week/day of the year
 3. Make Element IDs more consistant
-   - Most likely in the next update
+   - Almost done
