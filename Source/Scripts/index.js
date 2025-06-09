@@ -195,6 +195,7 @@ function updateAppearance() {
     elPlacement.value = settings.placement;
     elClockFontSize.value = settings.clockFontSize;
     elDateFontSize.value = settings.dateFontSize;
+    elBackgroundImg.value = settings.backgroundImage;
 
     if (settings.backgroundImage === "None") {
         clockEl.style.backgroundImage = "none";
