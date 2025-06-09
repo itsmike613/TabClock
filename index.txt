@@ -4,5 +4,5 @@ ________________________________________
    - If this gets support I will add it
 2. Add more date prefix options
    - Especially to week/day of the year
-3. Make Element IDs more consistant
-   - Almost done
+3. Add text shadow settings for clock text
+   - If this gets support I will add it

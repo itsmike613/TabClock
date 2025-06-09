@@ -25,7 +25,7 @@
 </head>
 
 <body>
-    <div class="section" id="clock">
+    <div class="section" id="clck">
         <div id="time"></div>
         <div id="date"></div>
         <div id="scroll-indicator">⬇️</div>
@@ -42,51 +42,51 @@
                 <div class="border-bottom pb-4 mb-4">
                     <div class="d-flex align-items-center mb-3">
                         <i class="ph ph-clock me-2"></i>
-                        <label class="form-check-label" for="toggle-24h">24-Hour Format</label>
+                        <label class="form-check-label" for="1224">24-Hour Format</label>
                         <div class="form-check form-switch ms-auto">
-                            <input class="form-check-input" type="checkbox" id="toggle-24h">
+                            <input class="form-check-input" type="checkbox" id="1224">
                         </div>
                     </div>
                     <div class="d-flex align-items-center mb-3">
                         <i class="ph ph-timer me-2"></i>
-                        <label class="form-check-label" for="toggle-seconds">Show Seconds</label>
+                        <label class="form-check-label" for="secs">Show Seconds</label>
                         <div class="form-check form-switch ms-auto">
-                            <input class="form-check-input" type="checkbox" id="toggle-seconds">
+                            <input class="form-check-input" type="checkbox" id="secs">
                         </div>
                     </div>
                     <div class="d-flex align-items-center mb-3">
                         <i class="ph ph-hourglass-low me-2"></i>
-                        <label class="form-check-label" for="toggle-milliseconds">Show Milliseconds</label>
+                        <label class="form-check-label" for="mtog">Show Milliseconds</label>
                         <div class="form-check form-switch ms-auto">
-                            <input class="form-check-input" type="checkbox" id="toggle-milliseconds">
+                            <input class="form-check-input" type="checkbox" id="mtog">
                         </div>
                     </div>
                     <div class="d-flex align-items-center mb-3">
                         <i class="ph ph-speedometer me-2"></i>
-                        <label class="form-check-label" for="toggle-slow-ms">Slower Millisecond Update</label>
+                        <label class="form-check-label" for="slow">Slower Millisecond Update</label>
                         <div class="form-check form-switch ms-auto">
-                            <input class="form-check-input" type="checkbox" id="toggle-slow-ms">
+                            <input class="form-check-input" type="checkbox" id="slow">
                         </div>
                     </div>
                     <div class="d-flex align-items-center mb-3">
                         <i class="ph ph-sun me-2"></i>
-                        <label class="form-check-label" for="toggle-ampm">Show AM/PM</label>
+                        <label class="form-check-label" for="ampm">Show AM/PM</label>
                         <div class="form-check form-switch ms-auto">
-                            <input class="form-check-input" type="checkbox" id="toggle-ampm">
+                            <input class="form-check-input" type="checkbox" id="ampm">
                         </div>
                     </div>
                     <div class="d-flex align-items-center mb-3">
                         <i class="ph ph-calendar-check me-2"></i>
-                        <label class="form-check-label" for="toggle-date">Show Date</label>
+                        <label class="form-check-label" for="dtog">Show Date</label>
                         <div class="form-check form-switch ms-auto">
-                            <input class="form-check-input" type="checkbox" id="toggle-date">
+                            <input class="form-check-input" type="checkbox" id="dtog">
                         </div>
                     </div>
                     <div class="d-flex align-items-center mb-3">
                         <i class="ph ph-eye-slash me-2"></i>
-                        <label class="form-check-label" for="toggle-hint">Hide Scroll Hint</label>
+                        <label class="form-check-label" for="htog">Hide Scroll Hint</label>
                         <div class="form-check form-switch ms-auto">
-                            <input class="form-check-input" type="checkbox" id="toggle-hint">
+                            <input class="form-check-input" type="checkbox" id="htog">
                         </div>
                     </div>
                 </div>
@@ -98,13 +98,13 @@
                             <span class="text-muted small fw-bold">DATE DISPLAY</span>
                         </div>
                         <div class="w-100 mb-2">
-                            <label for="date-input" class="form-label small">Date Format</label>
-                            <input class="form-control form-control-sm" id="date-input" placeholder="e.g. W, MM Do YYYY" oninput="const s = document.querySelector('select'), v = this.value;s.value = [...s.options].some(o => o.value === v) ? v : '';" />
+                            <label for="dtin" class="form-label small">Date Format</label>
+                            <input class="form-control form-control-sm" id="dtin" placeholder="e.g. W, MM Do YYYY" oninput="const s = document.querySelector('select'), v = this.value;s.value = [...s.options].some(o => o.value === v) ? v : '';" />
                         </div>
 
                         <div class="w-100 mb-3">
                             <label class="form-label small">Date Templates</label>
-                            <select class="form-select form-select-sm" onchange="const input = document.getElementById('date-input');input.value = this.value;input.dispatchEvent(new Event('input', { bubbles: true }));">
+                            <select class="form-select form-select-sm" onchange="const input = document.getElementById('dtin');input.value = this.value;input.dispatchEvent(new Event('input', { bubbles: true }));">
                                 <option value="" selected disabled>Select one</option>
                                 <option value="W, M Do YYYY">Monday, Jun 2nd 2025 (default)</option>
                                 <option value="DDDo day of YYYY">154th day of 2025</option>
@@ -161,13 +161,13 @@
                             <span class="text-muted small fw-bold">APPEARANCE</span>
                         </div>
                         <div class="w-100 mb-2">
-                            <label for="theme-select" class="form-label small">Theme</label>
-                            <select class="form-select form-select-sm" id="theme-select"></select>
+                            <label for="thme" class="form-label small">Theme</label>
+                            <select class="form-select form-select-sm" id="thme"></select>
                             <small class="form-text text-muted">Note: Selecting a theme overrides all settings below.</small>
                         </div>
                         <div class="w-100 mb-2">
-                            <label for="font-select" class="form-label small">Font</label>
-                            <select class="form-select form-select-sm" id="font-select">
+                            <label for="font" class="form-label small">Font</label>
+                            <select class="form-select form-select-sm" id="font">
                                 <option value="Bungee">Bungee</option>
                                 <option value="Bungee Hairline">Bungee Hairline</option>
                                 <option value="Bungee Inline">Bungee Inline</option>
@@ -210,16 +210,16 @@
                             </select>
                         </div>
                         <div class="w-100 mb-2">
-                            <label for="text-color" class="form-label small">Text Color</label>
-                            <input type="color" class="form-control form-control-sm" id="text-color">
+                            <label for="text" class="form-label small">Text Color</label>
+                            <input type="color" class="form-control form-control-sm" id="text">
                         </div>
                         <div class="w-100 mb-2">
-                            <label for="bg-color" class="form-label small">Background Color</label>
-                            <input type="color" class="form-control form-control-sm" id="bg-color">
+                            <label for="back" class="form-label small">Background Color</label>
+                            <input type="color" class="form-control form-control-sm" id="back">
                         </div>
                         <div class="w-100 mb-2">
-                            <label for="background-img" class="form-label small">Background Image</label>
-                            <select class="form-select form-select-sm" id="background-img">
+                            <label for="bgim" class="form-label small">Background Image</label>
+                            <select class="form-select form-select-sm" id="bgim">
                                 <option value="None" selected>None</option>
                                 <option value="Source/Images/Backgrounds/beach.jpg">Beach</option>
                                 <option value="Source/Images/Backgrounds/paper.jpg">Paper</option>
@@ -229,8 +229,8 @@
                             </select>
                         </div>
                         <div class="w-100 mb-2">
-                            <label for="placement-select" class="form-label small">Clock Placement</label>
-                            <select class="form-select form-select-sm" id="placement-select">
+                            <label for="plcm" class="form-label small">Clock Placement</label>
+                            <select class="form-select form-select-sm" id="plcm">
                                 <option value="top-left">Top Left</option>
                                 <option value="top-center">Top Center</option>
                                 <option value="top-right">Top Right</option>
@@ -243,8 +243,8 @@
                             </select>
                         </div>
                         <div class="w-100 mb-2">
-                            <label for="clock-fontsize" class="form-label small">Clock Font Size</label>
-                            <select class="form-select form-select-sm" id="clock-fontsize">
+                            <label for="ckfs" class="form-label small">Clock Font Size</label>
+                            <select class="form-select form-select-sm" id="ckfs">
                                 <option value="30px">1</option>
                                 <option value="40px">2</option>
                                 <option value="50px">3</option>
@@ -260,8 +260,8 @@
                             </select>
                         </div>
                         <div class="w-100 mb-2">
-                            <label for="date-fontsize" class="form-label small">Date Font Size</label>
-                            <select class="form-select form-select-sm" id="date-fontsize">
+                            <label for="dtfs" class="form-label small">Date Font Size</label>
+                            <select class="form-select form-select-sm" id="dtfs">
                                 <option value="32px">1 (default)</option>
                                 <option value="40px">2</option>
                                 <option value="50px">3</option>
@@ -280,7 +280,7 @@
                 </div>
 
                 <div class="settings-footer">
-                    <button class="btn btn-primary btn-sm w-100" id="fullscreen-btn">Fullscreen</button>
+                    <button class="btn btn-primary btn-sm w-100" id="full">Fullscreen</button>
                 </div>
             </div>
         </div>

@@ -39,24 +39,24 @@ const themeMap = {
 
 const el_time = document.getElementById("time");
 const el_date = document.getElementById("date");
-const el_clck = document.getElementById("clock");
-const el_1224 = document.getElementById("toggle-24h");
-const el_secs = document.getElementById("toggle-seconds");
-const el_ampm = document.getElementById("toggle-ampm");
-const el_dtog = document.getElementById("toggle-date");
-const el_mtog = document.getElementById("toggle-milliseconds");
-const el_slow = document.getElementById("toggle-slow-ms");
-const el_htog = document.getElementById("toggle-hint");
-const el_dtin = document.getElementById("date-input");
-const el_font = document.getElementById("font-select");
-const el_thme = document.getElementById("theme-select");
-const el_text = document.getElementById("text-color");
-const el_back = document.getElementById("bg-color");
-const el_plcm = document.getElementById("placement-select");
-const el_full = document.getElementById("fullscreen-btn");
-const el_ckfs = document.getElementById("clock-fontsize");
-const el_dtfs = document.getElementById("date-fontsize");
-const el_bgim = document.getElementById("background-img");
+const el_clck = document.getElementById("clck");
+const el_1224 = document.getElementById("1224");
+const el_secs = document.getElementById("secs");
+const el_ampm = document.getElementById("ampm");
+const el_dtog = document.getElementById("dtog");
+const el_mtog = document.getElementById("mtog");
+const el_slow = document.getElementById("slow");
+const el_htog = document.getElementById("htog");
+const el_dtin = document.getElementById("dtin");
+const el_font = document.getElementById("font");
+const el_thme = document.getElementById("thme");
+const el_text = document.getElementById("text");
+const el_back = document.getElementById("back");
+const el_plcm = document.getElementById("plcm");
+const el_full = document.getElementById("full");
+const el_ckfs = document.getElementById("ckfs");
+const el_dtfs = document.getElementById("dtfs");
+const el_bgim = document.getElementById("bgim");
 
 const settingHandlers = [
     { el: el_1224, key: "use24h", event: "change", action: () => toggleAMPMState() },
@@ -286,7 +286,7 @@ function startClock() {
 el_full.onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
 
 document.addEventListener("DOMContentLoaded", () => {
-    const themeSelect = document.getElementById("theme-select");
+    const themeSelect = document.getElementById("thme");
     Object.entries(themeMap).forEach(([key, value]) => {
         const option = document.createElement("option");
         option.value = key;
