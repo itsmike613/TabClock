@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Hairline&family=Bungee+Inline&family=Bungee+Outline&family=Bungee+Shade&family=Cherry+Bomb+One&family=Coral+Pixels&family=Doto:wght@395&family=Hanalei&family=Honk&family=Inter:opsz@14..32&family=Monoton&family=Moo+Lah+Lah&family=Nabla&family=Orbitron&family=Patrick+Hand&family=Poppins&family=Roboto+Mono&family=Rubik+Broken+Fax&family=Rubik+Burned&family=Rubik+Dirt&family=Rubik+Doodle+Shadow&family=Rubik+Glitch&family=Rubik+Glitch+Pop&family=Rubik+Iso&family=Rubik+Lines&family=Rubik+Marker+Hatch&family=Rubik+Maze&family=Rubik+Pixels&family=Rubik+Puddles&family=Rubik+Scribble&family=Rubik+Vinyl&family=Sawarabi+Mincho&family=Shadows+Into+Light+Two&family=Tagesschrift&family=Baloo+2&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Hairline&family=Bungee+Inline&family=Bungee+Outline&family=Bungee+Shade&family=Cherry+Bomb+One&family=Coral+Pixels&family=Doto:wght@395&family=Hanalei&family=Honk&family=Inter:opsz@14..32&family=Monoton&family=Moo+Lah+Lah&family=Nabla&family=Orbitron&family=Patrick+Hand&family=Poppins&family=Roboto+Mono&family=Rubik+Broken+Fax&family=Rubik+Burned&family=Rubik+Dirt&family=Rubik+Doodle+Shadow&family=Rubik+Glitch&family=Rubik+Glitch+Pop&family=Rubik+Iso&family=Rubik+Lines&family=Rubik+Marker+Hatch&family=Rubik+Maze&family=Rubik+Pixels&family=Rubik+Puddles&family=Rubik+Scribble&family=Rubik+Vinyl&family=Sawarabi+Mincho&family=Shadows+Into+Light+Two&family=Tagesschrift&display=swap");
 
 html,
 body {
@@ -57,7 +57,7 @@ html::-webkit-scrollbar {
 
 #date {
 	font-size: 2em;
-	margin-top: 20px;
+	margin-top: 15px;
 }
 
 #scroll-indicator {
