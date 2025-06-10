@@ -34,7 +34,8 @@ const themeMap = {
     spaceodyssey: { displayName: "Space Odyssey", bg: "#000022", text: "#ffffff", font: "Orbitron", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
     puddles: { displayName: "Puddles", bg: "#39ABD0", text: "#EDF1F3", font: "Rubik Puddles", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
     patrick: { displayName: "Patrick (w/ img) [NEW!]", bg: "#000000", text: "#F8F8FF", font: "Patrick Hand", backgroundImage: "Source/Images/Backgrounds/patrick.jpg", placement: "top-right", clockFontSize: "80px", dateFontSize: "32px" },
-    spiderman: { displayName: "Spiderman (w/ img) [NEW!]", bg: "#000000", text: "#F8F8FF", font: "Rubik Dirt", backgroundImage: "Source/Images/Backgrounds/spider.jpg", placement: "bottom-left", clockFontSize: "80px", dateFontSize: "32px" }
+    spiderman: { displayName: "Spiderman (w/ img) [NEW!]", bg: "#000000", text: "#F8F8FF", font: "Rubik Dirt", backgroundImage: "Source/Images/Backgrounds/spider.jpg", placement: "bottom-left", clockFontSize: "80px", dateFontSize: "32px" },
+    city: { displayName: "Cityscapes (w/ gif) [NEW!]", bg: "#000000", text: "#F8F8FF", font: "Inter", backgroundImage: "Source/Images/Backgrounds/city.gif", placement: "bottom-center", clockFontSize: "80px", dateFontSize: "32px" }
 };
 
 const el_time = document.getElementById("time");
