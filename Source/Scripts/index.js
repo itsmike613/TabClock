@@ -52,7 +52,7 @@ const el_htog = document.getElementById("htog");
 const el_dtin = document.getElementById("dtin");
 const el_font = document.getElementById("font");
 const el_thme = document.getElementById("thme");
-const el_text = document.getElementById("text");
+const el_tico = document.getElementById("tico");
 const el_back = document.getElementById("back");
 const el_plcm = document.getElementById("plcm");
 const el_full = document.getElementById("full");
@@ -71,7 +71,7 @@ const settingHandlers = [
     { el: el_htog, key: "hideHint", event: "change", action: () => updateClock() },
     { el: el_dtin, key: "datePattern", event: "input" },
     { el: el_font, key: "font", event: "change", action: () => updateAppearance() },
-    { el: el_text, key: "timeColor", event: "input", action: () => updateAppearance() },
+    { el: el_tico, key: "timeColor", event: "input", action: () => updateAppearance() },
     { el: el_back, key: "bgColor", event: "input", action: () => updateAppearance() },
     { el: el_thme, key: "theme", event: "change", action: () => applyTheme(settings.theme) },
     { el: el_plcm, key: "placement", event: "change", action: () => updateAppearance() },
@@ -234,7 +234,7 @@ function loadSettings() {
     el_dtin.value = settings.datePattern;
     el_font.value = settings.font;
     el_thme.value = settings.theme;
-    el_text.value = settings.timeColor;
+    el_tico.value = settings.timeColor;
     el_daco.value = settings.dateColor;
     el_back.value = settings.bgColor;
     el_plcm.value = settings.placement;
