@@ -8,8 +8,7 @@ const settings = {
     hideHint: false,
     datePattern: "W, M Do YYYY",
     font: "Inter",
-    timeColor: "#000000",
-    dateColor: "#000000",
+    textColor: "#000000",
     bgColor: "#FFFFFF",
     theme: "light",
     placement: "middle-center",
@@ -52,14 +51,13 @@ const el_htog = document.getElementById("htog");
 const el_dtin = document.getElementById("dtin");
 const el_font = document.getElementById("font");
 const el_thme = document.getElementById("thme");
-const el_tico = document.getElementById("tico");
+const el_text = document.getElementById("text");
 const el_back = document.getElementById("back");
 const el_plcm = document.getElementById("plcm");
 const el_full = document.getElementById("full");
 const el_ckfs = document.getElementById("ckfs");
 const el_dtfs = document.getElementById("dtfs");
 const el_bgim = document.getElementById("bgim");
-const el_daco = document.getElementById("daco");
 
 const settingHandlers = [
     { el: el_1224, key: "use24h", event: "change", action: () => toggleAMPMState() },
@@ -71,15 +69,13 @@ const settingHandlers = [
     { el: el_htog, key: "hideHint", event: "change", action: () => updateClock() },
     { el: el_dtin, key: "datePattern", event: "input" },
     { el: el_font, key: "font", event: "change", action: () => updateAppearance() },
-    { el: el_tico, key: "timeColor", event: "input", action: () => updateAppearance() },
+    { el: el_text, key: "textColor", event: "input", action: () => updateAppearance() },
     { el: el_back, key: "bgColor", event: "input", action: () => updateAppearance() },
     { el: el_thme, key: "theme", event: "change", action: () => applyTheme(settings.theme) },
     { el: el_plcm, key: "placement", event: "change", action: () => updateAppearance() },
     { el: el_ckfs, key: "clockFontSize", event: "change", action: () => updateAppearance() },
     { el: el_dtfs, key: "dateFontSize", event: "change", action: () => updateAppearance() },
-    { el: el_bgim, key: "backgroundImage", event: "change", action: () => updateAppearance() },
-    { el: el_daco, key: "dateColor", event: "input", action: () => updateAppearance() },
-
+    { el: el_bgim, key: "backgroundImage", event: "change", action: () => updateAppearance() }
 ];
 
 settingHandlers.forEach(({ el, key, event, action }) => {
@@ -174,7 +170,7 @@ function updateClock() {
 function applyTheme(theme) {
     const t = themeMap[theme];
     settings.bgColor = t.bg;
-    settings.timeColor = t.text;
+    settings.textColor = t.text;
     settings.font = t.font;
     settings.backgroundImage = t.backgroundImage;
     settings.placement = t.placement;
@@ -185,7 +181,7 @@ function applyTheme(theme) {
 
 function updateAppearance() {
     el_clck.style.backgroundColor = settings.bgColor;
-    el_clck.style.color = settings.timeColor;
+    el_clck.style.color = settings.textColor;
     el_clck.style.fontFamily = settings.font;
     el_time.style.fontSize = settings.clockFontSize;
     el_date.style.fontSize = settings.dateFontSize;
@@ -195,9 +191,7 @@ function updateAppearance() {
     el_clck.style.justifyContent = justifyMap[vertical];
     el_clck.style.alignItems = alignMap[horizontal];
     el_back.value = settings.bgColor;
-    el_time.style.color = settings.textColor;
-    el_date.style.color = settings.dateColor;
-    el_daco.value = settings.dateColor;
+    el_text.value = settings.textColor;
     el_font.value = settings.font;
     el_plcm.value = settings.placement;
     el_ckfs.value = settings.clockFontSize;
@@ -234,8 +228,7 @@ function loadSettings() {
     el_dtin.value = settings.datePattern;
     el_font.value = settings.font;
     el_thme.value = settings.theme;
-    el_tico.value = settings.timeColor;
-    el_daco.value = settings.dateColor;
+    el_text.value = settings.textColor;
     el_back.value = settings.bgColor;
     el_plcm.value = settings.placement;
     el_ckfs.value = settings.clockFontSize;
