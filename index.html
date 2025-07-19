@@ -128,24 +128,33 @@
                                     </div>
                                     <div class="modal-body small">
                                         <p>Use the prefixes below to format your date. You can also add your own text or emojis to customize the display.</p>
-                                        <ul>
-                                            <li><strong>YYYY</strong> - Full year (e.g. 2025)</li>
-                                            <li><strong>YY</strong> - Last two digits of year (e.g. 25)</li>
-                                            <li><strong>MM</strong> - Full month name (e.g. June)</li>
-                                            <li><strong>mm</strong> - Month number, zero-padded (e.g. 06)</li>
-                                            <li><strong>M</strong> - Month abbreviation (e.g. Jun)</li>
-                                            <li><strong>m</strong> - Month number (e.g. 6)</li>
-                                            <li><strong>DD</strong> - Day number, zero-padded (e.g. 02)</li>
-                                            <li><strong>D</strong> - Day number (e.g. 2)</li>
-                                            <li><strong>Do</strong> - Day with ordinal (e.g. 2nd)</li>
-                                            <li><strong>DDD</strong> - Day of the year (e.g. 154)</li>
-                                            <li><strong>DDDo</strong> - Day of the year with ordinal (e.g. 154th)</li>
-                                            <li><strong>W</strong> - Full weekday name (e.g. Monday)</li>
-                                            <li><strong>w</strong> - Weekday abbreviation (e.g. Mon)</li>
-                                            <li><strong>WW</strong> - ISO week number of the year (e.g. 23)</li>
-                                            <li><strong>Q</strong> - Quarter number (e.g. 2)</li>
-                                            <li><strong>Qo</strong> - Quarter with ordinal (e.g. 2nd)</li>
-                                        </ul>
+                                        <div class="card my-2">
+                                            <div class="table-responsive" style="max-height: 400px;">
+                                                <table class="table table-hover table-nowrap">
+                                                    <thead class="table-light">
+                                                        <tr><th scope="col">Prefix</th><th scope="col">Example Output</th><th scope="col">Description</th></tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr><td class="text-heading fw-bold">YYYY</td><td>2025</td><td>Full year</td></tr>
+                                                        <tr><td class="text-heading fw-bold">YY</td><td>25</td><td>Last two digits of year</td></tr>
+                                                        <tr><td class="text-heading fw-bold">MM</td><td>July</td><td>Full month name</td></tr>
+                                                        <tr><td class="text-heading fw-bold">mm</td><td>07</td><td>Month number, zero-padded</td></tr>
+                                                        <tr><td class="text-heading fw-bold">M</td><td>Jul</td><td>Month abbreviation</td></tr>
+                                                        <tr><td class="text-heading fw-bold">m</td><td>7</td><td>Month number</td></tr>
+                                                        <tr><td class="text-heading fw-bold">DD</td><td>04</td><td>Day number, zero-padded</td></tr>
+                                                        <tr><td class="text-heading fw-bold">D</td><td>4</td><td>Day Number</td></tr>
+                                                        <tr><td class="text-heading fw-bold">Do</td><td>4th</td><td>Day with ordinal</td></tr>
+                                                        <tr><td class="text-heading fw-bold">DDD</td><td>185</td><td>Day of the year</td></tr>
+                                                        <tr><td class="text-heading fw-bold">DDDo</td><td>185th</td><td>Day of the year with ordinal</td></tr>
+                                                        <tr><td class="text-heading fw-bold">W</td><td>Friday</td><td>Full weekday name</td></tr>
+                                                        <tr><td class="text-heading fw-bold">w</td><td>Fri</td><td>Weekday abbreviation</td></tr>
+                                                        <tr><td class="text-heading fw-bold">WW</td><td>27</td><td>ISO week number of the year</td></tr>
+                                                        <tr><td class="text-heading fw-bold">Q</td><td>3</td><td>Quarter number</td></tr>
+                                                        <tr><td class="text-heading fw-bold">Qo</td><td>3rd</td><td>Quarter with ordinal</td></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                         <p>Selecting a date template will clear the date format input and insert the corresponding prefix code for the chosen display.</p>
                                     </div>
                                 </div>
