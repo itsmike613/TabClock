@@ -133,7 +133,7 @@ function formatDate(now) {
 
 function formatTime(now) {
     let h = now.getHours();
-    const m = pad(now.getMinutes()), s = pad(now.getSeconds()), ms = pad(Math.floor(now.getMilliseconds() / (settings.slowMsUpdate ? 100 : 10)));
+    const m = pad(now.getMinutes()), s = pad(now.getSeconds()), ms = pad(now.getMilliseconds() / 10 | 0);
     let ampm = "";
 
     if (!settings.use24h) {
@@ -248,7 +248,7 @@ let lastMsUpdate = 0;
 
 function updateClock() {
     const now = new Date(), t = now.getTime();
-    if (!settings.showMilliseconds || (settings.slowMsUpdate && t - lastMsUpdate >= 100)) {
+    if (!settings.showMilliseconds || !settings.slowMsUpdate || t - lastMsUpdate >= 100) {
         const ts = formatTime(now);
         if (ts !== lastTimeString) el_time.textContent = lastTimeString = ts;
         lastMsUpdate = t;
