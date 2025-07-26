@@ -251,13 +251,9 @@ function toggleAMPMState() {
 }
 
 function toggleSlowMsState() {
-    if (!settings.showMilliseconds) {
-        el_slow.checked = false;
-        el_slow.disabled = true;
-        settings.slowMsUpdate = false;
-    } else {
-        el_slow.disabled = false;
-    }
+    const show = settings.showMilliseconds;
+    el_slow.disabled = !show;
+    if (!show) el_slow.checked = settings.slowMsUpdate = false;
 }
 
 let lastTimeString = "";
