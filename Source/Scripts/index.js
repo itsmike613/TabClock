@@ -86,42 +86,35 @@ settingHandlers.forEach(({ el, key, event, action }) => {
     });
 });
 
-function pad(n) {
-    return n < 10 ? "0" + n : n;
-}
+const pad = n => n < 10 ? "0" + n : n;
 
-function getOrdinal(n) {
+const getOrdinal = n => {
     const s = ["th", "st", "nd", "rd"];
     const v = n % 100;
     return n + (s[(v - 20) % 10] || s[v] || s[0]);
-}
+};
 
 function formatDate(now) {
     if (!settings.showDate) return "";
-    const D = now.getDate();
-    const DD = pad(D);
-    const Do = getOrdinal(D);
-    const m = now.getMonth() + 1;
-    const mm = pad(m);
+    const D = now.getDate(), m = now.getMonth() + 1, Y = now.getFullYear();
+    const DD = pad(D), mm = pad(m), Do = getOrdinal(D);
     const M = now.toLocaleString("default", { month: "short" });
     const MM = now.toLocaleString("default", { month: "long" });
     const w = now.toLocaleString("default", { weekday: "short" });
     const W = now.toLocaleString("default", { weekday: "long" });
-    const Y = now.getFullYear();
+
     const temp = new Date(Date.UTC(Y, now.getMonth(), D));
     const dayNum = temp.getUTCDay() || 7;
     temp.setUTCDate(temp.getUTCDate() + 4 - dayNum);
-    const yearStart = new Date(Date.UTC(temp.getUTCFullYear(), 0, 1));
-    const WW = Math.ceil((((temp - yearStart) / 86400000) + 1) / 7);
-    const startOfYear = new Date(Y, 0, 1);
-    const DDD = Math.ceil((now - startOfYear) / 86400000) + 1;
+    const WW = Math.ceil((((temp - Date.UTC(temp.getUTCFullYear(), 0, 1)) / 864e5) + 1) / 7);
+
+    const DDD = Math.floor((now - new Date(Y, 0, 1)) / 864e5) + 1;
     const DDDo = getOrdinal(DDD);
-    const Q = Math.floor((m - 1) / 3) + 1;
-    const Qo = getOrdinal(Q);
+    const Q = Math.floor((m - 1) / 3) + 1, Qo = getOrdinal(Q);
 
     return settings.datePattern
         .replace(/\bYYYY\b/g, Y)
-        .replace(/\bYY\b/g, String(Y).slice(-2))
+        .replace(/\bYY\b/g, Y % 100)
         .replace(/\bWW\b/g, WW)
         .replace(/\bDDDo\b/g, DDDo)
         .replace(/\bDDD\b/g, DDD)
@@ -140,18 +133,15 @@ function formatDate(now) {
 
 function formatTime(now) {
     let h = now.getHours();
-    let m = pad(now.getMinutes());
-    let s = pad(now.getSeconds());
-    let ms = pad(Math.floor(now.getMilliseconds() / 10));
+    const m = pad(now.getMinutes()), s = pad(now.getSeconds()), ms = pad(Math.floor(now.getMilliseconds() / (settings.slowMsUpdate ? 100 : 10)));
     let ampm = "";
 
     if (!settings.use24h) {
         ampm = h >= 12 ? "PM" : "AM";
         h = h % 12 || 12;
     }
-    h = pad(h);
 
-    let t = `${h}:${m}`;
+    let t = `${pad(h)}:${m}`;
     if (settings.showSeconds) t += `:${s}`;
     if (settings.showMilliseconds) t += `:${ms}`;
     if (settings.showAMPM && !settings.use24h) t += ` ${ampm}`;
@@ -241,13 +231,9 @@ function loadSettings() {
 }
 
 function toggleAMPMState() {
-    if (settings.use24h) {
-        el_ampm.checked = false;
-        el_ampm.disabled = true;
-        settings.showAMPM = false;
-    } else {
-        el_ampm.disabled = false;
-    }
+    const use24 = settings.use24h;
+    el_ampm.disabled = use24;
+    if (use24) el_ampm.checked = settings.showAMPM = false;
 }
 
 function toggleSlowMsState() {
@@ -262,7 +248,7 @@ let lastMsUpdate = 0;
 
 function updateClock() {
     const now = new Date(), t = now.getTime();
-    if (!settings.showMilliseconds || !settings.slowMsUpdate || t - lastMsUpdate >= 100) {
+    if (!settings.showMilliseconds || (settings.slowMsUpdate && t - lastMsUpdate >= 100)) {
         const ts = formatTime(now);
         if (ts !== lastTimeString) el_time.textContent = lastTimeString = ts;
         lastMsUpdate = t;
