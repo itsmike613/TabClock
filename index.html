@@ -106,13 +106,17 @@
                             <label class="form-label small">Date Templates</label>
                             <select class="form-select form-select-sm" onchange="const input = document.getElementById('dtin');input.value = this.value;input.dispatchEvent(new Event('input', { bubbles: true }));">
                                 <option value="" selected disabled>Select one</option>
-                                <option value="W, M Do YYYY">Monday, Jun 2nd 2025 (default)</option>
+                                <option value="W, M Do YYYY">Monday, Jun 2nd 2025 <span class="badge badge-blue-500">Default</span></option>
                                 <option value="DDDo day of YYYY">154th day of 2025</option>
-                                <option value="WW week of YYYY">23 week of 2025</option>
+                                <option value="WWo week of YYYY">23rd week of 2025</option>
                                 <option value="mm/DD/YYYY">06/02/2025</option>
                                 <option value="m/D/YY">6/2/25</option>
                                 <option disabled>──────────</option>
                                 <option value="Good morning class!">Good morning class!</option>
+                                <option value="Good afternoon class!">Good afternoon class!</option>
+                                <option value="Quote of the day: Insert Quote Here">Quote of the day: "Insert Quote Here"</option>
+                                <option value="Happy W, everyone!">Happy Monday, everyone!</option>
+                                <option value="Upcoming Test: Friday, 26th">Upcoming Test: Friday, 26th</option>
                             </select>
                         </div>
 

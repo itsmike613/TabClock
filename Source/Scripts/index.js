@@ -17,7 +17,7 @@ const settings = {
     backgroundImage: "None"
 };
 
-const themeMap = {
+const themes = {
     dark: { displayName: "Dark", bg: "#000000", text: "#ffffff", font: "Inter", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
     light: { displayName: "Light", bg: "#ffffff", text: "#000000", font: "Inter", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
     belgian: { displayName: "Belgian Evergreen", bg: "#e6d9bd", text: "#6f8b6e", font: "Hanalei", backgroundImage: "None", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
@@ -111,6 +111,7 @@ function formatDate(now) {
 
     const DDD = Math.floor((now - new Date(Y, 0, 1)) / 864e5) + 1;
     const DDDo = getOrdinal(DDD);
+    const WWo = getOrdinal(WW);
     const Q = Math.floor((m - 1) / 3) + 1, Qo = getOrdinal(Q);
 
     return settings.datePattern
@@ -129,7 +130,8 @@ function formatDate(now) {
         .replace(/\bm\b/g, m)
         .replace(/\bD\b/g, D)
         .replace(/\bW\b/g, W)
-        .replace(/\bw\b/g, w);
+        .replace(/\bw\b/g, w)
+        .replace(/\bWWo\b/g, WWo);
 }
 
 function formatTime(now) {
@@ -159,7 +161,7 @@ function updateClock() {
 }
 
 function applyTheme(theme) {
-    const t = themeMap[theme];
+    const t = themes[theme];
     settings.bgColor = t.bg;
     settings.textColor = t.text;
     settings.font = t.font;
@@ -207,7 +209,7 @@ function loadSettings() {
     const savedSettings = localStorage.getItem("TCDB_settings");
     if (savedSettings) {
         Object.assign(settings, JSON.parse(savedSettings));
-        if (!themeMap[settings.theme]) settings.theme = "dark";
+        if (!themes[settings.theme]) settings.theme = "dark";
     }
     el_1224.checked = settings.use24h;
     el_secs.checked = settings.showSeconds;
@@ -271,7 +273,7 @@ el_full.onclick = () => document.fullscreenElement ? document.exitFullscreen() :
 
 document.addEventListener("DOMContentLoaded", () => {
     const themeSelect = document.getElementById("thme");
-    Object.entries(themeMap).forEach(([key, value]) => {
+    Object.entries(themes).forEach(([key, value]) => {
         const option = document.createElement("option");
         option.value = key;
         option.textContent = value.displayName;
