@@ -39,6 +39,17 @@ html::-webkit-scrollbar {
 	align-items: center;
 }
 
+#clck::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--bg-image, none);
+    background-size: cover;
+    background-position: center;
+    filter: blur(var(--bg-blur, 0px));
+    z-index: -1;
+}
+
 #settings {
 	background: #f8f9fa;
 	padding: 60px 0;
