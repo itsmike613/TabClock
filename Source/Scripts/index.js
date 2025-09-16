@@ -99,45 +99,20 @@ const pad = n => n < 10 ? "0" + n : n;
 function formatDate(now) {
     if (!settings.showDate) return "";
     const d = dayjs(now);
-
-    const tokenMap = {
-        "YYYY": d.format("YYYY"),
-        "YY": d.format("YY"),
-        "MM": d.format("MMMM"),
-        "mm": d.format("MM"),
-        "M": d.format("MMM"),
-        "m": d.format("M"),
-        "DD": d.format("DD"),
-        "D": d.format("D"),
-        "Do": d.format("Do"),
-        "DDD": d.dayOfYear().toString(),
-        "DDDo": d.dayOfYear() + d.format("o"),
-        "W": d.format("dddd"),
-        "w": d.format("ddd"),
-        "WW": d.isoWeek().toString(),
-        "WWo": d.isoWeek() + d.format("o"),
-        "Q": d.format("Q"),
-        "Qo": d.format("Qo")
-    };
-
-    let output = settings.datePattern;
-    Object.entries(tokenMap).forEach(([key, value]) => {
-        output = output.replace(new RegExp(`\\b${key}\\b`, "g"), value);
-    });
-
-    return output;
+    const map = { "DDDo": d.dayOfYear() + d.format("o"), "WWo": d.isoWeek() + d.format("o") };
+    let str = d.format(settings.datePattern);
+    Object.entries(map).forEach(([k, v]) => str = str.replace(new RegExp(`\\b${k}\\b`, "g"), v));
+    return str;
 }
 
 function formatTime(now) {
     let h = now.getHours();
     const m = pad(now.getMinutes()), s = pad(now.getSeconds()), ms = pad(now.getMilliseconds() / 10 | 0);
     let ampm = "";
-
     if (!settings.use24h) {
         ampm = h >= 12 ? "PM" : "AM";
         h = h % 12 || 12;
     }
-
     let t = `${pad(h)}:${m}`;
     if (settings.showSeconds) t += `:${s}`;
     if (settings.showMilliseconds) t += `:${ms}`;
@@ -175,7 +150,6 @@ function updateAppearance() {
     el_ckfs.value = settings.clockFontSize;
     el_dtfs.value = settings.dateFontSize;
     el_bgim.value = settings.backgroundImage;
-
     if (settings.backgroundImage === "None") {
         el_clck.style.backgroundImage = "none";
         el_clck.style.backgroundColor = settings.bgColor;
@@ -192,10 +166,8 @@ function saveSettings() {
 
 function loadSettings() {
     const savedSettings = localStorage.getItem("TCDB_settings");
-    if (savedSettings) {
-        Object.assign(settings, JSON.parse(savedSettings));
-        if (!themes[settings.theme]) settings.theme = "dark";
-    }
+    if (savedSettings) Object.assign(settings, JSON.parse(savedSettings));
+    if (!themes[settings.theme]) settings.theme = "dark";
     el_1224.checked = settings.use24h;
     el_secs.checked = settings.showSeconds;
     el_ampm.checked = settings.showAMPM;
@@ -230,9 +202,7 @@ function toggleSlowMsState() {
     if (!show) el_slow.checked = settings.slowMsUpdate = false;
 }
 
-let lastTimeString = "";
-let lastDateString = "";
-let lastMsUpdate = 0;
+let lastTimeString = "", lastDateString = "", lastMsUpdate = 0;
 
 function updateClock() {
     const now = new Date(), t = now.getTime();
@@ -264,7 +234,6 @@ document.addEventListener("DOMContentLoaded", () => {
         option.textContent = value.displayName;
         themeSelect.appendChild(option);
     });
-
     loadSettings();
     startClock();
 });
