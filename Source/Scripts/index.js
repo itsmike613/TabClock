@@ -1,3 +1,9 @@
+dayjs.extend(dayjs_plugin_advancedFormat);
+dayjs.extend(dayjs_plugin_isoWeek);
+dayjs.extend(dayjs_plugin_quarterOfYear);
+dayjs.extend(dayjs_plugin_ordinal);
+dayjs.extend(dayjs_plugin_dayOfYear);
+
 const settings = {
     use24h: false,
     showSeconds: false,
@@ -90,49 +96,36 @@ settingHandlers.forEach(({ el, key, event, action }) => {
 
 const pad = n => n < 10 ? "0" + n : n;
 
-const getOrdinal = n => {
-    const s = ["th", "st", "nd", "rd"];
-    const v = n % 100;
-    return n + (s[(v - 20) % 10] || s[v] || s[0]);
-};
-
 function formatDate(now) {
     if (!settings.showDate) return "";
-    const D = now.getDate(), m = now.getMonth() + 1, Y = now.getFullYear();
-    const DD = pad(D), mm = pad(m), Do = getOrdinal(D);
-    const M = now.toLocaleString("default", { month: "short" });
-    const MM = now.toLocaleString("default", { month: "long" });
-    const w = now.toLocaleString("default", { weekday: "short" });
-    const W = now.toLocaleString("default", { weekday: "long" });
+    const d = dayjs(now);
 
-    const temp = new Date(Date.UTC(Y, now.getMonth(), D));
-    const dayNum = temp.getUTCDay() || 7;
-    temp.setUTCDate(temp.getUTCDate() + 4 - dayNum);
-    const WW = Math.ceil((((temp - Date.UTC(temp.getUTCFullYear(), 0, 1)) / 864e5) + 1) / 7);
+    const tokenMap = {
+        "YYYY": d.format("YYYY"),
+        "YY": d.format("YY"),
+        "MM": d.format("MMMM"),
+        "mm": d.format("MM"),
+        "M": d.format("MMM"),
+        "m": d.format("M"),
+        "DD": d.format("DD"),
+        "D": d.format("D"),
+        "Do": d.format("Do"),
+        "DDD": d.dayOfYear().toString(),
+        "DDDo": d.dayOfYear() + d.format("o"),
+        "W": d.format("dddd"),
+        "w": d.format("ddd"),
+        "WW": d.isoWeek().toString(),
+        "WWo": d.isoWeek() + d.format("o"),
+        "Q": d.format("Q"),
+        "Qo": d.format("Qo")
+    };
 
-    const DDD = Math.floor((now - new Date(Y, 0, 1)) / 864e5) + 1;
-    const DDDo = getOrdinal(DDD);
-    const WWo = getOrdinal(WW);
-    const Q = Math.floor((m - 1) / 3) + 1, Qo = getOrdinal(Q);
+    let output = settings.datePattern;
+    Object.entries(tokenMap).forEach(([key, value]) => {
+        output = output.replace(new RegExp(`\\b${key}\\b`, "g"), value);
+    });
 
-    return settings.datePattern
-        .replace(/\bYYYY\b/g, Y)
-        .replace(/\bYY\b/g, Y % 100)
-        .replace(/\bWW\b/g, WW)
-        .replace(/\bDDDo\b/g, DDDo)
-        .replace(/\bDDD\b/g, DDD)
-        .replace(/\bQo\b/g, Qo)
-        .replace(/\bQ\b/g, Q)
-        .replace(/\bDo\b/g, Do)
-        .replace(/\bDD\b/g, DD)
-        .replace(/\bMM\b/g, MM)
-        .replace(/\bmm\b/g, mm)
-        .replace(/\bM\b/g, M)
-        .replace(/\bm\b/g, m)
-        .replace(/\bD\b/g, D)
-        .replace(/\bW\b/g, W)
-        .replace(/\bw\b/g, w)
-        .replace(/\bWWo\b/g, WWo);
+    return output;
 }
 
 function formatTime(now) {
@@ -150,15 +143,6 @@ function formatTime(now) {
     if (settings.showMilliseconds) t += `:${ms}`;
     if (settings.showAMPM && !settings.use24h) t += ` ${ampm}`;
     return t;
-}
-
-function updateClock() {
-    const now = new Date();
-    const timeString = formatTime(now);
-    el_time.textContent = timeString;
-    el_date.textContent = formatDate(now);
-    el_date.style.display = settings.showDate ? "block" : "none";
-    document.getElementById("scroll-indicator").style.display = settings.hideHint ? "none" : "block";
 }
 
 function applyTheme(theme) {
