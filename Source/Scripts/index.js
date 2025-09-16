@@ -36,6 +36,7 @@ const themes = {
     patrick: { displayName: "Patrick (w/ img)", bg: "#000000", text: "#F8F8FF", font: "Patrick Hand", backgroundImage: "Source/Images/Backgrounds/patrick.jpg", placement: "top-right", clockFontSize: "80px", dateFontSize: "32px" },
     spiderman: { displayName: "Spiderman (w/ img)", bg: "#000000", text: "#F8F8FF", font: "Rubik Dirt", backgroundImage: "Source/Images/Backgrounds/spider.jpg", placement: "bottom-left", clockFontSize: "80px", dateFontSize: "32px" },
     minecraft: { displayName: "Minecraft (w/ img) [NEW!]", bg: "#FFFFFF", text: "#324076", font: "Bungee", backgroundImage: "Source/Images/Backgrounds/minecraft.jpg", placement: "top-center", clockFontSize: "60px", dateFontSize: "32px" },
+    blueprint: { displayName: "Blueprint (w/ img) [NEW!]", bg: "#000000", text: "#F2F2F3", font: "Rubik Marker Hatch", backgroundImage: "Source/Images/Backgrounds/blueprint.jpg", placement: "middle-center", clockFontSize: "80px", dateFontSize: "32px" },
     city: { displayName: "Cityscapes (w/ gif)", bg: "#000000", text: "#F8F8FF", font: "Inter", backgroundImage: "Source/Images/Backgrounds/city.gif", placement: "bottom-center", clockFontSize: "80px", dateFontSize: "32px" }
 };
 
