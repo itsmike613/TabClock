@@ -14,8 +14,7 @@ const settings = {
     placement: "middle-center",
     clockFontSize: "80px",
     dateFontSize: "32px",
-    backgroundImage: "None",
-    bgBlur: 0
+    backgroundImage: "None"
 };
 
 const themes = {
@@ -61,7 +60,6 @@ const el_full = document.getElementById("full");
 const el_ckfs = document.getElementById("ckfs");
 const el_dtfs = document.getElementById("dtfs");
 const el_bgim = document.getElementById("bgim");
-const el_bgbl = document.getElementById("bgbl");
 
 const settingHandlers = [
     { el: el_1224, key: "use24h", event: "change", action: () => toggleAMPMState() },
@@ -79,8 +77,7 @@ const settingHandlers = [
     { el: el_plcm, key: "placement", event: "change", action: () => updateAppearance() },
     { el: el_ckfs, key: "clockFontSize", event: "change", action: () => updateAppearance() },
     { el: el_dtfs, key: "dateFontSize", event: "change", action: () => updateAppearance() },
-    { el: el_bgim, key: "backgroundImage", event: "change", action: () => updateAppearance() },
-    { el: el_bgbl, key: "bgBlur", event: "input", action: () => updateAppearance() }
+    { el: el_bgim, key: "backgroundImage", event: "change", action: () => updateAppearance() }
 ];
 
 settingHandlers.forEach(({ el, key, event, action }) => {
@@ -194,22 +191,15 @@ function updateAppearance() {
     el_ckfs.value = settings.clockFontSize;
     el_dtfs.value = settings.dateFontSize;
     el_bgim.value = settings.backgroundImage;
-    el_bgbl.value = settings.bgBlur || 0;
 
     if (settings.backgroundImage === "None") {
         el_clck.style.backgroundImage = "none";
         el_clck.style.backgroundColor = settings.bgColor;
-        el_clck.style.setProperty("--bg-image", "none");
-        el_bgbl.disabled = true;
-        el_clck.style.setProperty("--bg-blur", "0px");
     } else {
-        el_bgbl.disabled = false;
-        el_clck.style.setProperty("--bg-image", `url('${settings.backgroundImage}')`);
-        el_clck.style.setProperty("--bg-blur", `${settings.bgBlur || 0}px`);
+        el_clck.style.backgroundImage = `url('${settings.backgroundImage}')`;
+        el_clck.style.backgroundSize = "cover";
+        el_clck.style.backgroundPosition = "center";
     }
-
-    el_clck.style.setProperty("--bg-image", settings.backgroundImage !== "None" ? `url('${settings.backgroundImage}')` : "none");
-    el_clck.style.setProperty("--bg-blur", `${settings.bgBlur || 0}px`);
 }
 
 function saveSettings() {
