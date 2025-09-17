@@ -40,26 +40,7 @@ const themes = {
     city: { displayName: "Cityscapes (w/ gif)", bg: "#000000", text: "#F8F8FF", font: "Inter", backgroundImage: "Source/Images/Backgrounds/city.gif", placement: "bottom-center", clockFontSize: "80px", dateFontSize: "32px" }
 };
 
-const el_time = document.getElementById("time");
-const el_date = document.getElementById("date");
-const el_clck = document.getElementById("clck");
-const el_1224 = document.getElementById("1224");
-const el_secs = document.getElementById("secs");
-const el_ampm = document.getElementById("ampm");
-const el_dtog = document.getElementById("dtog");
-const el_mtog = document.getElementById("mtog");
-const el_slow = document.getElementById("slow");
-const el_htog = document.getElementById("htog");
-const el_dtin = document.getElementById("dtin");
-const el_font = document.getElementById("font");
-const el_thme = document.getElementById("thme");
-const el_text = document.getElementById("text");
-const el_back = document.getElementById("back");
-const el_plcm = document.getElementById("plcm");
-const el_full = document.getElementById("full");
-const el_ckfs = document.getElementById("ckfs");
-const el_dtfs = document.getElementById("dtfs");
-const el_bgim = document.getElementById("bgim");
+const [ el_time, el_date, el_clck, el_1224, el_secs, el_ampm, el_dtog, el_mtog, el_slow, el_htog, el_dtin, el_font, el_thme, el_text, el_back, el_plcm, el_full, el_ckfs, el_dtfs, el_bgim ] = [ "time","date","clck","1224","secs","ampm","dtog","mtog", "slow","htog","dtin","font","thme","text","back","plcm", "full","ckfs","dtfs","bgim" ].map(id => document.getElementById(id));
 
 const settingHandlers = [
     { el: el_1224, key: "use24h", event: "change", action: () => toggleAMPMState() },
