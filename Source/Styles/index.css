@@ -52,6 +52,7 @@ html::-webkit-scrollbar {
 }
 
 #time {
+	font-variant-numeric: tabular-nums;
 	font-size: 5em;
 }
 
