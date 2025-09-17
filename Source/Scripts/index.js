@@ -1,9 +1,3 @@
-dayjs.extend(dayjs_plugin_advancedFormat);
-dayjs.extend(dayjs_plugin_isoWeek);
-dayjs.extend(dayjs_plugin_quarterOfYear);
-dayjs.extend(dayjs_plugin_ordinal);
-dayjs.extend(dayjs_plugin_dayOfYear);
-
 const settings = {
     use24h: false,
     showSeconds: false,
@@ -96,28 +90,75 @@ settingHandlers.forEach(({ el, key, event, action }) => {
 
 const pad = n => n < 10 ? "0" + n : n;
 
+const getOrdinal = n => {
+    const s = ["th", "st", "nd", "rd"];
+    const v = n % 100;
+    return n + (s[(v - 20) % 10] || s[v] || s[0]);
+};
+
 function formatDate(now) {
     if (!settings.showDate) return "";
-    const d = dayjs(now);
-    const map = { "DDDo": d.dayOfYear() + d.format("o"), "WWo": d.isoWeek() + d.format("o") };
-    let str = d.format(settings.datePattern);
-    Object.entries(map).forEach(([k, v]) => str = str.replace(new RegExp(`\\b${k}\\b`, "g"), v));
-    return str;
+    const D = now.getDate(), m = now.getMonth() + 1, Y = now.getFullYear();
+    const DD = pad(D), mm = pad(m), Do = getOrdinal(D);
+    const M = now.toLocaleString("default", { month: "short" });
+    const MM = now.toLocaleString("default", { month: "long" });
+    const w = now.toLocaleString("default", { weekday: "short" });
+    const W = now.toLocaleString("default", { weekday: "long" });
+
+    const temp = new Date(Date.UTC(Y, now.getMonth(), D));
+    const dayNum = temp.getUTCDay() || 7;
+    temp.setUTCDate(temp.getUTCDate() + 4 - dayNum);
+    const WW = Math.ceil((((temp - Date.UTC(temp.getUTCFullYear(), 0, 1)) / 864e5) + 1) / 7);
+
+    const DDD = Math.floor((now - new Date(Y, 0, 1)) / 864e5) + 1;
+    const DDDo = getOrdinal(DDD);
+    const WWo = getOrdinal(WW);
+    const Q = Math.floor((m - 1) / 3) + 1, Qo = getOrdinal(Q);
+
+    return settings.datePattern
+        .replace(/\bYYYY\b/g, Y)
+        .replace(/\bYY\b/g, Y % 100)
+        .replace(/\bWW\b/g, WW)
+        .replace(/\bDDDo\b/g, DDDo)
+        .replace(/\bDDD\b/g, DDD)
+        .replace(/\bQo\b/g, Qo)
+        .replace(/\bQ\b/g, Q)
+        .replace(/\bDo\b/g, Do)
+        .replace(/\bDD\b/g, DD)
+        .replace(/\bMM\b/g, MM)
+        .replace(/\bmm\b/g, mm)
+        .replace(/\bM\b/g, M)
+        .replace(/\bm\b/g, m)
+        .replace(/\bD\b/g, D)
+        .replace(/\bW\b/g, W)
+        .replace(/\bw\b/g, w)
+        .replace(/\bWWo\b/g, WWo);
 }
 
 function formatTime(now) {
     let h = now.getHours();
     const m = pad(now.getMinutes()), s = pad(now.getSeconds()), ms = pad(now.getMilliseconds() / 10 | 0);
     let ampm = "";
+
     if (!settings.use24h) {
         ampm = h >= 12 ? "PM" : "AM";
         h = h % 12 || 12;
     }
+
     let t = `${pad(h)}:${m}`;
     if (settings.showSeconds) t += `:${s}`;
     if (settings.showMilliseconds) t += `:${ms}`;
     if (settings.showAMPM && !settings.use24h) t += ` ${ampm}`;
     return t;
+}
+
+function updateClock() {
+    const now = new Date();
+    const timeString = formatTime(now);
+    el_time.textContent = timeString;
+    el_date.textContent = formatDate(now);
+    el_date.style.display = settings.showDate ? "block" : "none";
+    document.getElementById("scroll-indicator").style.display = settings.hideHint ? "none" : "block";
 }
 
 function applyTheme(theme) {
@@ -150,6 +191,7 @@ function updateAppearance() {
     el_ckfs.value = settings.clockFontSize;
     el_dtfs.value = settings.dateFontSize;
     el_bgim.value = settings.backgroundImage;
+
     if (settings.backgroundImage === "None") {
         el_clck.style.backgroundImage = "none";
         el_clck.style.backgroundColor = settings.bgColor;
@@ -166,8 +208,10 @@ function saveSettings() {
 
 function loadSettings() {
     const savedSettings = localStorage.getItem("TCDB_settings");
-    if (savedSettings) Object.assign(settings, JSON.parse(savedSettings));
-    if (!themes[settings.theme]) settings.theme = "dark";
+    if (savedSettings) {
+        Object.assign(settings, JSON.parse(savedSettings));
+        if (!themes[settings.theme]) settings.theme = "dark";
+    }
     el_1224.checked = settings.use24h;
     el_secs.checked = settings.showSeconds;
     el_ampm.checked = settings.showAMPM;
@@ -202,7 +246,9 @@ function toggleSlowMsState() {
     if (!show) el_slow.checked = settings.slowMsUpdate = false;
 }
 
-let lastTimeString = "", lastDateString = "", lastMsUpdate = 0;
+let lastTimeString = "";
+let lastDateString = "";
+let lastMsUpdate = 0;
 
 function updateClock() {
     const now = new Date(), t = now.getTime();
@@ -234,6 +280,7 @@ document.addEventListener("DOMContentLoaded", () => {
         option.textContent = value.displayName;
         themeSelect.appendChild(option);
     });
+
     loadSettings();
     startClock();
 });

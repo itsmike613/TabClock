@@ -7,5 +7,3 @@ _________________________________________________________________
    - Especially to week/day of the year
 3. Add text shadow settings for clock text
    - If this gets support I will add it
-4. Add and delete some wallpapers
-   - Better quality ones
